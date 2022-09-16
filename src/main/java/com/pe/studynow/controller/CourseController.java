@@ -57,16 +57,16 @@ public class CourseController {
 		return "courses/list-courses";
 	}
 	
-	@PostMapping("/save")
+	@PostMapping("save")
 	public String saveCourse(@Valid Course course, BindingResult result, Model model, SessionStatus status)
 			throws Exception {
 		if (result.hasErrors()) {
-			return "courses/list-courses";
+			return "redirect:/courses";
 		} else {
 			int rpta = courseService.insert(course);
 			if (rpta > 0) {
 				model.addAttribute("mensaje", "Ya existe");
-				return "redirect:courses/list-courses";
+				return "redirect:/courses";
 			} else {
 				model.addAttribute("mensaje", "Se guardó correctamente");
 				status.setComplete();
@@ -74,7 +74,7 @@ public class CourseController {
 		}
 		model.addAttribute("listCourses", courseService.list());
 
-		return "/courses/list-courses";
+		return "redirect:/courses";
 	}
 	
 	@GetMapping("{id}/edit")
