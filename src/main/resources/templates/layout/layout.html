@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="frag-head">
+<meta charset="utf-8">
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+<script src="https://kit.fontawesome.com/65219acda5.js"
+	crossorigin="anonymous"></script>
+<link th:href="@{/css/solid.min.css}" rel="stylesheet">
+<link th:href="@{/css/header.css}" rel="stylesheet">
+<title>StudyNow</title>
+<style>
+.bd-placeholder-img {
+	font-size: 1.125rem;
+	text-anchor: middle;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	user-select: none;
+}
+
+@media ( min-width : 768px) {
+	body {
+		font-size: 16px;
+	}
+	.bd-placeholder-img-lg {
+		font-size: 3.5rem;
+	}
+}
+</style>
+</head>
+<body>
+	<header th:fragment="frag-header"
+		style="background-color: #007686; color: white">
+		<nav class="navbar navbar-expand-lg">
+			<div class="container-fluid">
+				<a href="/main" class="navbar-brand"> <img
+					th:src="@{/img/Logo.png}" width="75px" alt="logo">
+				</a>
+				<button class="navbar-toggler" type="button"
+					data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+					aria-controls="navbarSupportedContent" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<i class="fas fa-bars fs-4" style="color: white"></i>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-5">
+						<li class="nav-item"><a
+							class="nav-link" style="color: white"
+							th:href="@{/students/profile}"> Inicio</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</header>
+
+	<footer class="sticky-footer text-center p-2" th:fragment="frag-footer"
+		style="background-color: #007686; color: white">
+		<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+		<script th:src="@{/js/sb-admin-2.min.js}"></script>
+		<div class="container my-auto">
+			<div class="copyright text-center my-auto">
+				<span>Copyright &copy; StudyNow 2022</span>
+			</div>
+		</div>
+	</footer>
+
+</body>
+</html>
