@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.pe.studynow.business.crud.CourseService;
 import com.pe.studynow.model.entity.Course;
@@ -26,22 +27,17 @@ import com.pe.studynow.model.entity.Course;
 public class CourseController {
 	@Autowired
 	private CourseService courseService;
-/*
-	@GetMapping	
-	public String listCourses(Model model) {
-		
-		try {
-			List<Course> courses = courseService.getAll();
-			model.addAttribute("courses", courses);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
-		return "courses/list-courses";
-	}
-	*/
+
+	/*
+	 * @GetMapping public String listCourses(Model model) {
+	 * 
+	 * try { List<Course> courses = courseService.getAll();
+	 * model.addAttribute("courses", courses); } catch (Exception e) { // TODO
+	 * Auto-generated catch block e.printStackTrace(); }
+	 * 
+	 * 
+	 * return "courses/list-courses"; }
+	 */
 	@GetMapping
 	public String newCourse(Model model) {
 		Course course = new Course();
@@ -49,57 +45,57 @@ public class CourseController {
 		try {
 			List<Course> courses = courseService.getAll();
 			model.addAttribute("courses", courses);
-			
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return "courses/list-courses";
+		return "courses/courses";
 	}
-	
+
 	@PostMapping("save")
-	public String saveCourse(@Valid Course course, BindingResult result, Model model, SessionStatus status)
+	public String saveCourse(@Valid Course course, BindingResult result, Model model, SessionStatus status, RedirectAttributes redirectAttrs)
 			throws Exception {
 		if (result.hasErrors()) {
-			return "redirect:/courses";
+			return "courses/courses";
 		} else {
 			int rpta = courseService.insert(course);
 			if (rpta > 0) {
 				model.addAttribute("mensaje", "Ya existe");
-				return "redirect:/courses";
+				return "courses/courses";
 			} else {
-				model.addAttribute("mensaje", "Se guardó correctamente");
-				status.setComplete();
+				redirectAttrs.addFlashAttribute("mensaje", "Se guardo correctamente").addFlashAttribute("clase",
+						"sucess");
 			}
 		}
-		model.addAttribute("listCourses", courseService.list());
+		model.addAttribute("courses", courseService.list());
 
 		return "redirect:/courses";
 	}
-	
+
 	@GetMapping("{id}/edit")
 	public String editCourse(Model model, @PathVariable("id") Integer id) {
-			try {
-				if(courseService.existById(id)) {
-					Optional<Course> optional = courseService.findById(id);
-					model.addAttribute("course", optional.get());
-					List<Course> courses = courseService.getAll();
-					model.addAttribute("courses", courses);
-				} else {
-					return "redirect:/courses";
-				}
-				
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		try {
+			if (courseService.existById(id)) {
+				Optional<Course> optional = courseService.findById(id);
+				model.addAttribute("course", optional.get());
+				List<Course> courses = courseService.getAll();
+				model.addAttribute("courses", courses);
+			} else {
+				return "redirect:/courses";
 			}
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return "courses/edit-course";
 	}
-	
+
 	@PostMapping("{id}/update")
 	public String updateCourse(Model model, @ModelAttribute("course") Course course, @PathVariable("id") Integer id) {
 		try {
-			if(courseService.existById(id)) {
+			if (courseService.existById(id)) {
 				courseService.update(course);
 			} else {
 				return "redirect:/courses";
@@ -110,11 +106,11 @@ public class CourseController {
 		}
 		return "redirect:/courses";
 	}
-	
+
 	@GetMapping("{id}/delete")
 	public String deleteCourse(Model model, @PathVariable("id") Integer id) {
 		try {
-			if(courseService.existById(id)) {
+			if (courseService.existById(id)) {
 				courseService.deleteById(id);
 			} else {
 				return "redirect:/courses";

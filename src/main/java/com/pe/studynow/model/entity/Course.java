@@ -21,8 +21,8 @@ public class Course {
 	@Column(name = "name", length = 75, nullable = false)
 	private String name;
 	
-	@Min(value = 1, message = "El valor debe ser mayor a 1")
-	@Max(value = 8, message = "El valor debe ser menor a 8")
+	@Min(value = 1, message = "El valor debe ser mayor a 1 y menor a 8")
+	@Max(value = 8, message = "El valor debe ser mayor a 1 y menor a 8")
 	@Column(name = "number_credits")
 	private int numberCredits;
 
