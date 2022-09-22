@@ -20,10 +20,19 @@
 						Creditos</label> <input type="text" class="form-control"
 						th:field="*{numberCredits}" required>
 				</div>
-
+				
+				<div class="mb-3">
+					<label for="career" class="form-label">Carrera</label> <select
+						class="form-select" th:field="*{career}" required>
+						<option value="">Elige una carrera</option>
+						<option th:each="career : ${careers}" th:value="${career.id}"
+							th:text="${career.name}"></option>
+					</select>
+				</div>
+				
 				<div class="mb-3 form-check" style="text-align: center;">
-					<button class="btn" type="submit" style="background-color: #18A0FB; color: white">Editar
-					</button>
+					<button class="btn" type="submit"
+						style="background-color: #18A0FB; color: white">Editar</button>
 				</div>
 			</form>
 		</div>

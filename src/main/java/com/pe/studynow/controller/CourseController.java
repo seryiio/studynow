@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.pe.studynow.business.crud.CareerService;
 import com.pe.studynow.business.crud.CourseService;
+import com.pe.studynow.model.entity.Career;
 import com.pe.studynow.model.entity.Course;
 
 @Controller
@@ -27,6 +29,9 @@ import com.pe.studynow.model.entity.Course;
 public class CourseController {
 	@Autowired
 	private CourseService courseService;
+	
+	@Autowired
+	private CareerService careerService;
 
 	/*
 	 * @GetMapping public String listCourses(Model model) {
@@ -45,6 +50,8 @@ public class CourseController {
 		try {
 			List<Course> courses = courseService.getAll();
 			model.addAttribute("courses", courses);
+			List<Career> careers = careerService.getAll();
+			model.addAttribute("careers", careers);
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -83,6 +90,8 @@ public class CourseController {
 				model.addAttribute("course", optional.get());
 				List<Course> courses = courseService.getAll();
 				model.addAttribute("courses", courses);
+				List<Career> careers = careerService.getAll();
+				model.addAttribute("careers", careers);
 			} else {
 				return "redirect:/courses";
 			}
