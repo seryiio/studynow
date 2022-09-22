@@ -56,6 +56,8 @@ public class CourseController {
 	@PostMapping("save")
 	public String saveCourse(@Valid Course course, BindingResult result, Model model, SessionStatus status, RedirectAttributes redirectAttrs)
 			throws Exception {
+		List<Course> courses = courseService.getAll();
+		model.addAttribute("courses", courses);
 		if (result.hasErrors()) {
 			return "courses/courses";
 		} else {
@@ -112,6 +114,21 @@ public class CourseController {
 		try {
 			if (courseService.existById(id)) {
 				courseService.deleteById(id);
+			} else {
+				return "redirect:/courses";
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "redirect:/courses";
+	}
+	
+	@GetMapping("{id}/deleteCourses")
+	public String deleteCourses(Model model, @PathVariable("id") Integer id) {
+		try {
+			if (courseService.existById(id)) {
+				courseService.deleteCourses(id);
 			} else {
 				return "redirect:/courses";
 			}

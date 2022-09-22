@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: frag-head">
+<meta charset="ISO-8859-1">
+<title>Editar Curso</title>
+</head>
+<body>
+	<header th:replace="layout/layout :: frag-header"></header>
+	<section class="section">
+		<div class="mx-5 mt-5">
+			<form th:action="@{'/courses/' + ${course.id} + '/update'}"
+				th:object="${course}" method="post" novalidate>
+				<div class="mb-3">
+					<label for="name" class="form-label">Nombre del Curso</label> <input
+						type="text" class="form-control" th:field="*{name}" required>
+				</div>
+
+				<div class="mb-3">
+					<label for="numberCredits" class="form-label">Cantidad de
+						Creditos</label> <input type="text" class="form-control"
+						th:field="*{numberCredits}" required>
+				</div>
+
+				<div class="mb-3 form-check" style="text-align: center;">
+					<button class="btn" type="submit" style="background-color: #18A0FB; color: white">Editar
+					</button>
+				</div>
+			</form>
+		</div>
+	</section>
+	<footer th:replace="layout/layout :: frag-footer"></footer>
+</body>
+</html>

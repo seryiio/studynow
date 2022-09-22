@@ -34,11 +34,17 @@ public class CourseServiceImpl implements CourseService{
 	}
 
 	@Override
+	@Transactional
+	public Integer deleteCourses(Integer id) {
+		int rpta = courseRepository.eliminarMuchosCurso(id);
+		return rpta;
+	}
+
+	@Override
 	@Transactional(readOnly = true)
 	public List<Course> list() {
 		// TODO Auto-generated method stub
 		return courseRepository.findAll(Sort.by(Sort.Direction.DESC, "name"));
 	}
-	
 
 }

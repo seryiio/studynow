@@ -1,10 +1,16 @@
 package com.pe.studynow.model.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -25,6 +31,25 @@ public class Course {
 	@Max(value = 8, message = "El valor debe ser mayor a 1 y menor a 8")
 	@Column(name = "number_credits")
 	private int numberCredits;
+	
+	@OneToMany(mappedBy = "course")
+	private List<Enrollment> enrollment;
+	
+	@OneToMany(mappedBy = "course")
+	private List<Student> student;
+
+	@OneToMany(mappedBy = "course")
+	private List<Teacher> teacher;
+
+	@ManyToOne
+	@JoinColumn(name = "career_id")
+	private Career career;
+	
+	public Course() {
+		enrollment = new ArrayList<>();
+		student = new ArrayList<>();
+		teacher = new ArrayList<>();
+	}
 
 	public Integer getId() {
 		return id;
@@ -49,6 +74,38 @@ public class Course {
 	public void setNumberCredits(int numberCredits) {
 		this.numberCredits = numberCredits;
 	}
-	
+
+	public List<Enrollment> getEnrollment() {
+		return enrollment;
+	}
+
+	public void setEnrollment(List<Enrollment> enrollment) {
+		this.enrollment = enrollment;
+	}
+
+	public List<Student> getStudent() {
+		return student;
+	}
+
+	public void setStudent(List<Student> student) {
+		this.student = student;
+	}
+
+	public List<Teacher> getTeacher() {
+		return teacher;
+	}
+
+	public void setTeacher(List<Teacher> teacher) {
+		this.teacher = teacher;
+	}
+
+	public Career getCareer() {
+		return career;
+	}
+
+	public void setCareer(Career career) {
+		this.career = career;
+	}
+
 	
 }

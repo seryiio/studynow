@@ -1,10 +1,10 @@
 <!doctype html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="layout/layout :: frag-head">
-<meta charset="ISO-8859-1">
+<meta charset="utf-8">
 <title>Listar Curso</title>
+<script type="text/javascript" src="//code.jquery.com/jquery-1.6.2.js"></script>
 </head>
-<body>
 	<header th:replace="layout/layout :: frag-header"></header>
 	<section class="px-3">
 		<div class="card-body" style="text-align: left;">
@@ -40,27 +40,34 @@
 	</section>
 	<hr>
 	<section class="px-5">
-		<table class="table table-striped">
-			<thead>
+		<div class="d-flex justify-content-end">
+			<a href="" class="btn btn-lg disabled" tabindex="-1" role="button"
+				id="button1" aria-disabled="true"
+				style="background-color: #18A0FB; color: white">Borrar Todo</a>
+		</div>
+		<table class="table align-middle mb-0 mt-3 bg-white">
+			<thead class="bg-light">
 				<tr class="table">
 					<th scope="col"></th>
 					<th scope="col">Curso</th>
 					<th scope="col">Creditos</th>
-					<th scope="col"></th>
+					<th scope="col">Acciones</th>
 				</tr>
-			</thead>
 			<tbody>
 				<tr th:each="course : ${courses}">
 					<td class="text-center"><input class="form-check-input"
-						type="checkbox" th:field="*{courses}" th:value="${course.id}"></td>
+						type="checkbox" onclick="javacript:EnableDisableButton(this);"
+						th:field="*{courses}" th:value="${course.id}"></td>
 					<td th:text="${course.name}"></td>
 					<td th:text="${course.numberCredits}"></td>
 					<td><a class="btn" type="submit"
 						th:href="@{'/courses/' + ${course.id} + '/edit'}"
-						style="background-color: #18A0FB; color: white">Modificar</a> <a
-						class="btn" type="submit"
-						th:href="@{'/courses/' + ${course.id} + '/delete'}"
-						style="background-color: #18A0FB; color: white">Eliminar</a></td>
+						style="background-color: transparent; color: #18A0FB"><i
+							class="fa-regular fa-pen-to-square"></i></a> <a class="btn"
+						type="submit" th:href="@{'/courses/' + ${course.id} + '/delete'}"
+						style="background-color: transparent; color: #18A0FB"
+						onclick="return confirm('¿Estás seguro de eliminar el curso?')"><i
+							class="fa-solid fa-trash-can"></i></a></td>
 				</tr>
 			</tbody>
 		</table>
@@ -68,7 +75,47 @@
 			<div class="col-md-4" style="text-align: center;"></div>
 			<div class="col-md-4" style="text-align: center;"></div>
 		</div>
+
+		<!-- Modal  EN EL BOTON EDIT= data-bs-toggle="modal"  data-bs-target="#staticBackdrop"-->
+		<!-- <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
+			data-bs-keyboard="false" tabindex="-1"
+			aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-scrollable">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="staticBackdropLabel">Editar Curso</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"
+							aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<form th:action="@{'/courses/' + ${course.id} + '/update'}" th:object="${course}" method="post" novalidate>
+							<div class="mb-3">
+								<label for="name" class="form-label">Nombre del Curso</label> <input
+									type="text" class="form-control" th:field="*{name}" required>
+							</div>
+
+							<div class="mb-3">
+								<label for="numberCredits" class="form-label">Cantidad de Creditos</label> <input
+									type="text" class="form-control" th:field="*{numberCredits}" required>
+							</div>
+
+							<div class="mb-3 form-check" style="text-align: center;">
+								<button class="btn btn-warning" type="submit">
+									<i class="fas fa-save"></i> Editar
+								</button>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-bs-dismiss="modal">Cancelar</button>
+						<button type="button" class="btn"
+							style="background-color: #18A0FB; color: white">Editar</button>
+					</div>
+				</div>
+			</div>
+		</div> -->
 	</section>
-	<!-- <footer th:replace="layout/layout :: frag-footer"></footer> -->
+	<footer th:replace="layout/layout :: frag-footer"></footer>
 </body>
 </html>

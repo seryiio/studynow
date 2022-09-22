@@ -5,13 +5,10 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.pe.studynow.model.entity.Course;
+import com.pe.studynow.model.entity.Teacher;
 
 @Repository
-public interface CourseRepository extends JpaRepository<Course, Integer>{
+public interface TeacherRepository extends JpaRepository<Teacher, Integer>{
 	@Query("select count(c.name) from Course c where c.name =:name")
-	public int buscarNombreCurso(@Param("name") String nombreCurso);
-	
-	@Query(value="delete from courses where id IN (=:cursos)", nativeQuery = true)
-	public int eliminarMuchosCurso(@Param("cursos") Integer nombreCursosEliminar);
+	public int buscarNombreProfesor(@Param("name") String nombreProfesor);
 }
