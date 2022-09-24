@@ -7,6 +7,7 @@
 <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
 <link th:href="@{/css/solid.min.css}" rel="stylesheet">
 <link th:href="@{/css/header.css}" rel="stylesheet">
+<link th:href="@{/css/style.css}" rel="stylesheet">
 <title>StudyNow</title>
 <style>
 .bd-placeholder-img {
@@ -32,8 +33,8 @@
 		style="background-color: #007686; color: white">
 		<nav class="navbar navbar-expand-lg">
 			<div class="container-fluid">
-				<a href="/main" class="navbar-brand"> <img
-					th:src="@{/img/logo.png}" width="45px" alt="logo">
+				<a href="/" class="navbar-brand"> <img th:src="@{/img/logo.png}"
+					width="45px" alt="logo">
 				</a>
 				<button class="navbar-toggler" type="button"
 					data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -42,13 +43,57 @@
 					<i class="fas fa-bars fs-4" style="color: white"></i>
 				</button>
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
-					<ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-5">
+					<ul class="navbar-nav mb-lg-0 mx-4">
 						<li class="nav-item"><a class="nav-link" style="color: white"
-							th:href="@{/students/profile}"> Inicio</a></li>
+							th:href="@{/}"> Inicio</a></li>
+						<li class="nav-item"><a class="nav-link" style="color: white"
+							th:href="@{/}"> Matricula</a></li>
+						<li class="nav-item dropdown"><a
+							class="nav-link dropdown-toggle" href="/" id="navbarDropdown"
+							role="button" data-bs-toggle="dropdown" aria-expanded="false"
+							style="color: white"> Tablas </a>
+							<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+								<li><a class="dropdown-item" th:href="@{/careers}">Carreras</a></li>
+								<li><a class="dropdown-item" th:href="@{/courses}">Cursos</a></li>
+								<li><a class="dropdown-item" th:href="@{/teachers}">Profesores</a></li>
+								<li><a class="dropdown-item" th:href="@{/students}">Estudiantes</a></li>
+								<li><a class="dropdown-item" th:href="@{/users}">Usuarios</a></li>
+							</ul></li>
 					</ul>
+				</div>
+				<button type="button" class="btn bw-bold"
+					style="background-color: transparent; color: white"
+					data-bs-toggle="modal" data-bs-target="#exampleModal">
+					Cerrar Sesion</button>
+			</div>
+
+			<div class="modal fade" id="exampleModal" tabindex="-1"
+				aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel"
+								style="color: black">¿Listo para salir?</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal"
+								aria-label="Close"></button>
+						</div>
+						<div class="modal-body" style="color: black">Seleccione
+							"Cerrar sesión" a continuación si está listo para finalizar su
+							sesión actual.</div>
+						<div class="modal-footer">
+							<form id="logoutForm" th:action="@{/logout}" method="post">
+								<button class="btn" style="background-color: #18A0FB; color:white"
+									onclick="document.getElementById('logoutForm').submit();"
+									type="submit">Cerrar Sesion</button>
+								<button type="button" class="btn btn-secondary"
+									data-bs-dismiss="modal">Cancelar</button>
+							</form>
+						</div>
+					</div>
 				</div>
 			</div>
 		</nav>
+
 	</header>
 
 	<footer class="sticky-footer text-center p-2" th:fragment="frag-footer">

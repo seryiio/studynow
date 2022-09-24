@@ -1,0 +1,25 @@
+@media ( max-width : 1400px) {
+	html {
+		font-size: 24px;
+	}
+}
+
+@media ( max-width : 768px) {
+	html {
+		font-size: 16px;
+	}
+}
+
+@media ( max-width : 450px) {
+	html {
+		font-size: 10px;
+	}
+}
+
+.textoBienvenida{
+	font-size : 2rem;
+}
+
+.iconoPerfilBienvenida{
+	font-size : 10rem;
+}

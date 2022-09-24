@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="layout/layout :: frag-head">
+<title>StudyNow</title>
+</head>
+<body>
+	<header th:replace="layout/layout :: frag-header"></header>
+	<section>
+		<div class="container">
+			<div
+				class="row g-3 needs-validation justify-content-center text-center mt-5 mb-5 align-items-center">
+				<div class="textoBienvenida h-100 d-inline-block mx-2 col-md-4">
+					Bienvenido a StudyNow:
+					<div class="col">
+						<div class="fw-bold">"Nombre de la Persona"</div>
+					</div>
+				</div>
+				<div
+					class="iconoPerfilBienvenida h-100 d-inline-block mx-2 col-md-4">
+					<i class="fa-solid fa-user-tie"></i>
+				</div>
+			</div>
+			<div class="col align-self-center" style="text-align: center">
+				<button class="btn w-25" type="submit"
+					style="background-color: #18A0FB; color: white">Perfiles</button>
+			</div>
+		</div>
+	</section>
+	<footer th:replace="layout/layout :: frag-footer"></footer>
+</body>
+</html>

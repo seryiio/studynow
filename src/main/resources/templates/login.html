@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+<link th:href="@{/css/fontawesome.min.css}" rel="stylesheet">
+<link th:href="@{/css/solid.min.css}" rel="stylesheet">
+<link th:href="@{/css/signin.css}" rel="stylesheet">
+<title>StudyNow</title>
+</head>
+<body class="text-center">
+	<main class="form-signin w-100 m-auto">
+		<form th:action="@{/login}" method="post">
+			<div
+				class="d-flex flex-wrap justify-content-center py-3 mb-4 align-items-center text-white">
+				<label for="fw-bold" style="color: black; font-size: 3rem">Bienvenido</label>
+			</div>
+			<div class="w-100 col-sm-3 mb-3">
+				<input type="text" class="form-control" name="username"
+					id="username" placeholder="Usuario" autofocus required />
+			</div>
+			<div class="w-100 col-sm-3 mb-3">
+				<input type="password" class="form-control" name="password"
+					id="password" placeholder="Clave" required />
+			</div>
+			<div class="w-100 col-sm-3">
+				<input type="submit" class="w-100 btn btn-lg" style="background-color: #18A0FB; color: white"
+					value="Ingresar" />
+			</div>
+		</form>
+	</main>
+</body>
+</html>
