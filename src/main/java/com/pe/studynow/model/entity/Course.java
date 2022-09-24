@@ -33,22 +33,14 @@ public class Course {
 	private int numberCredits;
 	
 	@OneToMany(mappedBy = "course")
-	private List<Enrollment> enrollment;
-	
-	@OneToMany(mappedBy = "course")
-	private List<Student> student;
-
-	@OneToMany(mappedBy = "course")
-	private List<Teacher> teacher;
+	private List<Section> section;
 
 	@ManyToOne
 	@JoinColumn(name = "career_id")
 	private Career career;
 	
 	public Course() {
-		enrollment = new ArrayList<>();
-		student = new ArrayList<>();
-		teacher = new ArrayList<>();
+		section = new ArrayList<>();
 	}
 
 	public Integer getId() {
@@ -75,28 +67,12 @@ public class Course {
 		this.numberCredits = numberCredits;
 	}
 
-	public List<Enrollment> getEnrollment() {
-		return enrollment;
+	public List<Section> getSection() {
+		return section;
 	}
 
-	public void setEnrollment(List<Enrollment> enrollment) {
-		this.enrollment = enrollment;
-	}
-
-	public List<Student> getStudent() {
-		return student;
-	}
-
-	public void setStudent(List<Student> student) {
-		this.student = student;
-	}
-
-	public List<Teacher> getTeacher() {
-		return teacher;
-	}
-
-	public void setTeacher(List<Teacher> teacher) {
-		this.teacher = teacher;
+	public void setSection(List<Section> section) {
+		this.section = section;
 	}
 
 	public Career getCareer() {

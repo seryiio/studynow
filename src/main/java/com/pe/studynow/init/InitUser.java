@@ -1,11 +1,19 @@
 package com.pe.studynow.init;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.pe.studynow.model.entity.Segment;
+import com.pe.studynow.model.entity.User;
+import com.pe.studynow.model.repository.UserRepository;
+
 @Service
 public class InitUser implements CommandLineRunner {
+	
+	@Autowired
+	private UserRepository userRepository;
 	
 	@Override
 	public void run(String... args) throws Exception {

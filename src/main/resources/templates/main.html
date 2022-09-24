@@ -12,13 +12,28 @@
 				class="row g-3 needs-validation justify-content-center text-center mt-5 mb-5 align-items-center">
 				<div class="textoBienvenida h-100 d-inline-block mx-2 col-md-4">
 					Bienvenido a StudyNow:
-					<div class="col">
-						<div class="fw-bold">"Nombre de la Persona"</div>
+					<div sec:authorize="hasRole('ROLE_ADMINISTRATOR')"
+						class="col fw-bold">
+						<p
+							th:text="${'Administrador: ' + administrator.firstName + ' ' + administrator.lastName}"></p>
+					</div>
+					<div sec:authorize="hasRole('ROLE_TEACHER')" class="col fw-bold">
+						<p
+							th:text="${'Profesor: ' + administrator.firstName + ' ' + administrator.lastName}"></p>
+					</div>
+					<div sec:authorize="hasRole('ROLE_STUDENT')" class="col fw-bold">
+						<p
+							th:text="${'Estudiante: ' + administrator.firstName + ' ' + administrator.lastName}"></p>
 					</div>
 				</div>
-				<div
-					class="iconoPerfilBienvenida h-100 d-inline-block mx-2 col-md-4">
-					<i class="fa-solid fa-user-tie"></i>
+				<div sec:authorize="hasRole('ROLE_ADMINISTRATOR')"
+					class="iconoPerfilBienvenida h-100 d-inline-block mx-2 col-md-4"><i class="fa-solid fa-user-secret"></i>
+				</div>
+				<div sec:authorize="hasRole('ROLE_STUDENT')"
+					class="iconoPerfilBienvenida h-100 d-inline-block mx-2 col-md-4"><i class="fa-solid fa-user"></i>
+				</div>
+				<div sec:authorize="hasRole('ROLE_TEACHER')"
+					class="iconoPerfilBienvenida h-100 d-inline-block mx-2 col-md-4"><i class="fa-solid fa-user-tie-hair"></i>
 				</div>
 			</div>
 			<div class="col align-self-center" style="text-align: center">

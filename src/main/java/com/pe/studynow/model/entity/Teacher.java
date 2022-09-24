@@ -29,14 +29,27 @@ public class Teacher {
 	@Column(name = "first_name", length = 50, nullable = false)	
 	private String firstName;
 	
-	@Min(value = 1, message = "El valor debe ser mayor a 1")
-	@Max(value = 70, message = "El valor debe menor a 70")
-	@Column(name = "age")
-	private Integer age;
+	@Min(value = 10000000, message = "El valor debe tener 8 digitos")
+	@Max(value = 99999999, message = "El valor debe tener 8 digitos")
+	@Column(name = "dni")	
+	private Integer dni;
+	
+	@Min(value = 100000000, message = "El valor debe tener 9 digitos")
+	@Max(value = 999999999, message = "El valor debe tener 9 digitos")
+	@Column(name = "phone_number")
+	private Integer phoneNumber;
+
+	@Size(min = 1,max = 70, message = "El valor debe estar entre 1 y 70 caracteres")
+	@Column(name = "email_university", length = 70)	
+	private String emailUniversity;
+
+	@Size(min = 1,max = 70, message = "El valor debe estar entre 1 y 70 caracteres")
+	@Column(name = "email_personal", length = 70)	
+	private String emailPersonal;
 	
 	@ManyToOne
 	@JoinColumn(name = "course_id")
-	private Course course;
+	private Section section;
 
 	@ManyToOne
 	@JoinColumn(name = "career_id")
@@ -66,20 +79,44 @@ public class Teacher {
 		this.firstName = firstName;
 	}
 
-	public Integer getAge() {
-		return age;
+	public Integer getDni() {
+		return dni;
 	}
 
-	public void setAge(Integer age) {
-		this.age = age;
+	public void setDni(Integer dni) {
+		this.dni = dni;
 	}
 
-	public Course getCourse() {
-		return course;
+	public Integer getPhoneNumber() {
+		return phoneNumber;
 	}
 
-	public void setCourse(Course course) {
-		this.course = course;
+	public void setPhoneNumber(Integer phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+	public String getEmailUniversity() {
+		return emailUniversity;
+	}
+
+	public void setEmailUniversity(String emailUniversity) {
+		this.emailUniversity = emailUniversity;
+	}
+
+	public String getEmailPersonal() {
+		return emailPersonal;
+	}
+
+	public void setEmailPersonal(String emailPersonal) {
+		this.emailPersonal = emailPersonal;
+	}
+
+	public Section getSection() {
+		return section;
+	}
+
+	public void setSection(Section section) {
+		this.section = section;
 	}
 
 	public Career getCareer() {

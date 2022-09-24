@@ -1,0 +1,53 @@
+html, body {
+	height: 100%;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+@media ( max-width : 1400px) {
+	html {
+		font-size: 24px;
+	}
+}
+
+@media ( max-width : 768px) {
+	html {
+		font-size: 16px;
+	}
+}
+
+@media ( max-width : 450px) {
+	html {
+		font-size: 10px;
+	}
+}
+
+.textoBienvenida {
+	font-size: 2rem;
+}
+
+.iconoPerfilBienvenida {
+	font-size: 10rem;
+}
+
+.wrapper {
+	height: 100%;
+	width: 100%;
+	display: table;
+	overflow: hidden;
+}
+
+.contenedor {
+	display: table-cell;
+	width: 100%;
+	vertical-align: middle;
+	text-align: center;
+}
+
+.contenido {
+	display: inline-block;
+	margin: 0 auto;
+}
