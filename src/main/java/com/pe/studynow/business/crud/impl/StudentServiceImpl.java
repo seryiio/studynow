@@ -27,7 +27,7 @@ public class StudentServiceImpl implements StudentService{
 	@Override
 	@Transactional
 	public Integer insert(Student student) {
-		int rpta = studentRepository.buscarNombreEstudiante(student.getLastName());
+		int rpta = studentRepository.buscarDNIEstudiante(student.getDni());
 		if (rpta == 0) {
 			studentRepository.save(student);
 		}

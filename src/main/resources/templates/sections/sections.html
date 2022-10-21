@@ -24,23 +24,28 @@
 				</div>
 				<div class="modal-body">
 					<form th:action="@{/sections/save}" th:object="${section}"
-						method="post" novalidate><p class="fst-italic" style="color:gray">Para agregar una sección registre un curso y un profesor.</p>
+						method="post" novalidate>
+						<p class="fst-italic" style="color: gray">Para agregar una
+							sección registre un curso y un profesor.</p>
 						<div class="mb-3">
 							<label for="name" class="form-label">Nombre de la Seccion</label>
-							<input type="text" class="form-control" th:field="*{name}" placeholder="Ejemplo: SS71"
-								required>
+							<input type="text" class="form-control" th:field="*{name}"
+								placeholder="Ejemplo: SS71" th:errorclass="'form-control alert-danger'" required><small
+								class="form-text text-danger"
+								th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></small>
 						</div>
 
 						<div class="mb-3">
 							<label for="vacancies" class="form-label">Vacantes</label> <input
-								type="text" class="form-control" th:field="*{vacancies}"
-								required>
+								type="text" class="form-control" th:field="*{vacancies}" th:errorclass="'form-control alert-danger'"
+								required><small class="form-text text-danger"
+								th:if="${#fields.hasErrors('vacancies')}"
+								th:errors="*{vacancies}"></small>
 						</div>
 
 						<div class="mb-3">
 							<label for="startTime" class="form-label">Hora Comienzo</label> <input
-								type="time" class="form-control" th:field="*{startTime}"
-								required>
+								type="time" class="form-control" th:field="*{startTime}" required>
 						</div>
 
 						<div class="mb-3">
@@ -50,29 +55,31 @@
 
 						<div class="mb-3">
 							<label for="course" class="form-label">Curso</label> <select
-								class="form-select" th:field="*{course}" required>
+								class="form-select" th:field="*{course}" th:errorclass="'form-control alert-danger'" required>
 								<option value="">Elige un Curso</option>
 								<option th:each="course : ${courses}" th:value="${course.id}"
 									th:text="${course.name}"></option>
-							</select>
+							</select> <small class="form-text text-danger"
+								th:if="${#fields.hasErrors('course')}" th:errors="*{course}"></small>
 						</div>
-						
+
 						<div class="mb-3">
 							<label for="teacher" class="form-label">Profesor</label> <select
-								class="form-select" th:field="*{teacher}" required>
+								class="form-select" th:field="*{teacher}" th:errorclass="'form-control alert-danger'" required>
 								<option value="">Elige un profesor</option>
 								<option th:each="teacher : ${teachers}" th:value="${teacher.id}"
 									th:text="${teacher.firstName + ' ' + teacher.lastName + ' -  Profesor de:' + ' ' + teacher.career.name}"></option>
-							</select>
+							</select><small class="form-text text-danger"
+								th:if="${#fields.hasErrors('teacher')}" th:errors="*{teacher}"></small>
 						</div>
-						
-						<div class="mt-5"
-							style="text-align: right;">
+
+						<div class="mt-5" style="text-align: right;">
 							<button type="button" class="btn btn-secondary"
 								data-bs-dismiss="modal">Cancelar</button>
 							<button type="submit" class="btn"
 								style="background-color: #18A0FB; color: white">Agregar</button>
 						</div>
+						<p th:text="${mensaje}" class="form-text text-danger"></p>
 					</form>
 				</div>
 			</div>
@@ -106,7 +113,8 @@
 					th:field="*{sections}" th:value="${section.id}"></td>
 				<td th:text="${section.name}"></td>
 				<td th:text="${section.course.name}"></td>
-				<td th:text="${section.teacher.firstName + ' ' + section.teacher.lastName}"></td>
+				<td
+					th:text="${section.teacher.firstName + ' ' + section.teacher.lastName}"></td>
 				<td th:text="${section.vacancies}"></td>
 				<td th:text="${section.startTime}"></td>
 				<td th:text="${section.endTime}"></td>

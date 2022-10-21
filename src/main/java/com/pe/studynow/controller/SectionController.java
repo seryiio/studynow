@@ -77,15 +77,19 @@ public class SectionController {
 			throws Exception {
 		List<Section> sections = sectionService.getAll();
 		model.addAttribute("sections", sections);
+		List<Course> courses = courseService.getAll();
+		model.addAttribute("courses", courses);
+		List<Teacher> teacher = teacherService.getAll();
+		model.addAttribute("teachers", teacher);
 		if (result.hasErrors()) {
 			return "sections/sections";
 		} else {
 			int rpta = sectionService.insert(section);
 			if (rpta > 0) {
-				model.addAttribute("mensaje", "Ya existe");
+				model.addAttribute("mensaje", "Ya existe esta seccion");
 				return "sections/sections";
 			} else {
-				redirectAttrs.addFlashAttribute("mensaje", "Se guardo correctamente").addFlashAttribute("clase",
+				redirectAttrs.addFlashAttribute("mensaje", "Se guardó correctamente").addFlashAttribute("clase",
 						"sucess");
 			}
 		}

@@ -73,7 +73,7 @@ public class CourseController {
 		} else {
 			int rpta = courseService.insert(course);
 			if (rpta > 0) {
-				model.addAttribute("mensaje", "Ya existe");
+				model.addAttribute("mensaje", "Ya existe este curso");
 				return "courses/courses";
 			} else {
 				redirectAttrs.addFlashAttribute("mensaje", "Se guardo correctamente").addFlashAttribute("clase",

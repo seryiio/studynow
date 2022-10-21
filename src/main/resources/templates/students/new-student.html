@@ -49,8 +49,9 @@
 									<label for="student.id" class="form-label">Codigo</label> <input
 										id="codigoAlumno1" type="text" class="form-control"
 										th:field="*{student.id}" onkeyup="PasarValor();"
-										th:errorclass="'form-control alert-danger'" placeholder="Ejemplo: 202012145" required>
-									<small class="form-text text-danger"
+										th:errorclass="'form-control alert-danger'"
+										placeholder="Ejemplo: 202012145" required> <small
+										class="form-text text-danger"
 										th:if="${#fields.hasErrors('student.id')}"
 										th:errors="*{student.id}"></small>
 								</div>
@@ -95,8 +96,8 @@
 								</div>
 
 								<div class="mb-3">
-									<label for="student.emailPersonal" class="form-label">Correo Personal</label>
-									<input type="text" class="form-control"
+									<label for="student.emailPersonal" class="form-label">Correo
+										Personal</label> <input type="text" class="form-control"
 										th:field="*{student.emailPersonal}"
 										th:errorclass="'form-control alert-danger'" required>
 									<small class="form-text text-danger"
@@ -105,8 +106,8 @@
 								</div>
 
 								<div class="mb-3">
-									<label for="student.emailUniversity" class="form-label">Correo Universitario</label>
-									<input type="text" class="form-control"
+									<label for="student.emailUniversity" class="form-label">Correo
+										Universitario</label> <input type="text" class="form-control"
 										th:field="*{student.emailUniversity}"
 										th:errorclass="'form-control alert-danger'" required>
 									<small class="form-text text-danger"
@@ -115,18 +116,17 @@
 								</div>
 
 								<div class="mb-3">
-									<label for="student.cycle" class="form-label">Ciclo</label>
-									<input type="text" class="form-control"
-										th:field="*{student.cycle}"
+									<label for="student.cycle" class="form-label">Ciclo</label> <input
+										type="text" class="form-control" th:field="*{student.cycle}"
 										th:errorclass="'form-control alert-danger'" required>
 									<small class="form-text text-danger"
 										th:if="${#fields.hasErrors('student.cycle')}"
 										th:errors="*{student.cycle}"></small>
 								</div>
-								
+
 								<div class="mb-3">
-									<label for="student.creditAmount" class="form-label">Cantidad de Creditos</label>
-									<input type="text" class="form-control"
+									<label for="student.creditAmount" class="form-label">Cantidad
+										de Creditos</label> <input type="text" class="form-control"
 										th:field="*{student.creditAmount}"
 										th:errorclass="'form-control alert-danger'" required>
 									<small class="form-text text-danger"
@@ -136,13 +136,12 @@
 
 								<div class="mb-3">
 									<label for="student.career" class="form-label">Carrera</label>
-									<select class="form-select" th:field="*{student.career}" th:errorclass="'form-control alert-danger'"
-										required>
+									<select class="form-select" th:field="*{student.career}"
+										th:errorclass="'form-control alert-danger'" required>
 										<option value="">Elige una Carrera</option>
 										<option th:each="career : ${careers}" th:value="${career.id}"
 											th:text="${career.name}"></option>
-									</select>
-									<small class="form-text text-danger" 
+									</select> <small class="form-text text-danger"
 										th:if="${#fields.hasErrors('student.career')}"
 										th:errors="*{student.career}"></small>
 								</div>
@@ -151,6 +150,7 @@
 										style="background-color: #18A0FB; color: white">Agregar
 										Datos Alumno</button>
 								</div>
+								<p th:text="${mensaje}" class="form-text text-danger"></p>
 							</form>
 						</div>
 					</div>

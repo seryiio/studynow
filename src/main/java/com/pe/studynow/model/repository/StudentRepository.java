@@ -9,6 +9,6 @@ import com.pe.studynow.model.entity.Student;
 
 @Repository
 public interface StudentRepository extends JpaRepository<Student, String>{
-	@Query("select count(s.firstName) from Student s where s.firstName =:firstName")
-	public int buscarNombreEstudiante(@Param("firstName") String nombreEstudiante);
+	@Query("select count(s.dni) from Student s where s.dni =:dni")
+	public int buscarDNIEstudiante(@Param("dni") Integer dniEstudiante);
 }

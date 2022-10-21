@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -30,7 +31,7 @@ import com.pe.studynow.model.entity.User;
 @RequestMapping("/students")
 @SessionAttributes("{student}")
 public class StudentController {
-	
+
 	@Autowired
 	private StudentService studentService;
 
@@ -70,8 +71,8 @@ public class StudentController {
 	}
 
 	@PostMapping("save")
-	public String saveStudent(@Valid @ModelAttribute("student") Student student, BindingResult result, Model model, SessionStatus status,
-			RedirectAttributes redirectAttrs) {
+	public String saveStudent(@Valid @ModelAttribute("student") Student student, BindingResult result, Model model,
+			SessionStatus status, RedirectAttributes redirectAttrs) {
 		try {
 			if (result.hasErrors()) {
 				List<Career> careers = careerService.getAll();
@@ -80,9 +81,9 @@ public class StudentController {
 			} else {
 				int rpta = studentService.insert(student);
 				if (rpta > 0) {
-					model.addAttribute("mensaje", "Ya existe");
+					model.addAttribute("mensaje", "Ya existe este estudiante");
 					return "students/new-student";
-				} 
+				}
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -128,6 +129,37 @@ public class StudentController {
 		return "redirect:/students";
 	}
 
+	@PostMapping("{id}/updateMyData")
+	public String updateupdateMyDataStudent(Model model, @ModelAttribute("student") Student student,
+			@PathVariable("id") String id, @RequestParam("newDni") Integer dni, @RequestParam("newPhone") Integer phone,
+			@RequestParam("newemailPersonal") String emailPersonal,
+			@RequestParam("newemailUniversity") String emailUniversity, @RequestParam("newCareer") Career career,
+			@RequestParam("newID") String idStudent, @RequestParam("newFirstName") String firstName,
+			@RequestParam("newLastName") String lastName, @RequestParam("newCycle") Integer cycle,
+			@RequestParam("newCreditAmount") Integer creditAmount) {
+		try {
+			if (studentService.existById(id)) {
+				student.setDni(dni);
+				student.setPhoneNumber(phone);
+				student.setEmailPersonal(emailPersonal);
+				student.setEmailUniversity(emailUniversity);
+				student.setId(idStudent);
+				student.setFirstName(firstName);
+				student.setLastName(lastName);
+				student.setCycle(cycle);
+				student.setCreditAmount(creditAmount);
+				student.setCareer(career);
+				studentService.update(student);
+			} else {
+				return "redirect:/users/view-profile";
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "redirect:/users/view-profile";
+	}
+
 	@GetMapping("{id}/delete")
 	public String deleteStudent(Model model, @PathVariable("id") String id) {
 		try {
@@ -149,5 +181,5 @@ public class StudentController {
 		segments.add(Segment.TEACHER);
 		return segments;
 	}
-	
+
 }

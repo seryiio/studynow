@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.pe.studynow.business.crud.CareerService;
 import com.pe.studynow.business.crud.UserService;
+import com.pe.studynow.model.entity.Career;
 import com.pe.studynow.model.entity.Segment;
 import com.pe.studynow.model.entity.User;
 import com.pe.studynow.utils.UserAuthentication;
@@ -27,6 +29,8 @@ import com.pe.studynow.utils.UserAuthentication;
 @SessionAttributes("{user}")
 public class UserController {
 
+	@Autowired
+	private CareerService careerService;
 	@Autowired
 	private UserService userService;
 
@@ -83,10 +87,13 @@ public class UserController {
 	}
 	
 	@GetMapping("view-profile")
-	public String getIndex(Model model) {	
-		
+	public String getIndex(Model model) throws Exception {	
 		if (userAuthentication.isAuthenticated()) {	// Enviar los datos del Segmento al html
 			userAuthentication.getSegment(model);
+			Career career = new Career();
+			model.addAttribute("career", career);
+			List<Career> careers = careerService.getAll();
+			model.addAttribute("careers", careers);
 		}
 		return "users/view-profile";
 	}

@@ -1,57 +1,239 @@
 <!doctype html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head th:replace="layout/layout :: frag-head">
 <title>Perfil</title>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://kit.fontawesome.com/65219acda5.js"></script>
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+<link th:href="@{/css/solid.min.css}" rel="stylesheet">
+<link th:href="@{/css/viewProfileStyle.css}" rel="stylesheet">
 </head>
 <body>
 
 	<header th:insert="layout/layout :: frag-header"></header>
-	<main>
+	<section class="wrapper">
 
-		<section class="container py-4">
-			<div class="p-5 mb-4 bg-light rounded-3">
-				<div class="container-fluid py-5">
-					<h1 class="display-5 fw-bold">
-						<i class="fa-solid fa-user"></i> Perfil <a sec:authorize="hasRole('ROLE_STUDENT')" class="btn"
-							type="submit" th:href="@{'/students/' + ${student.id} + '/edit'}"
-							style="background-color: transparent; color: #18A0FB"><i
-							class="fa-regular fa-pen-to-square"></i></a>
-					</h1>
+		<div class="contenedor" style="text-align: left;">
+			<div class="row align-items-center align-middle">
+				<div class="col-8 p-5 mb-4 bg-light rounded-3">
+					<div class="row container-fluid py-5">
+						<h1 class="display-5 fw-bold">
+							Perfil <a class="btn" sec:authorize="hasRole('ROLE_STUDENT')"
+								type="submit" data-bs-toggle="modal"
+								th:attr="data-bs-target='#staticBackdrop1'+*{student.id}"
+								style="background-color: transparent; color: #18A0FB"><i
+								class="fa-regular fa-pen-to-square"></i></a> <a class="btn"
+								sec:authorize="hasRole('ROLE_TEACHER')" type="submit"
+								data-bs-toggle="modal"
+								th:attr="data-bs-target='#staticBackdrop2'+*{teacher.id}"
+								style="background-color: transparent; color: #18A0FB"><i
+								class="fa-regular fa-pen-to-square"></i></a>
 
-					<p class="col-md-8 fs-4">
-						Username: <span sec:authentication="name"></span>
-					</p>
-					<div sec:authorize="hasRole('ROLE_TEACHER')">
+
+						</h1>
+						<div sec:authorize="hasRole('ROLE_STUDENT')" class="modal fade"
+							th:id="*{'staticBackdrop1'+{student.id}}"
+							data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+							aria-labelledby="staticBackdropLabel" aria-hidden="true">
+							<div class="modal-dialog modal-dialog-scrollable">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="staticBackdropLabel">Editar
+											Datos Estudiante</h5>
+										<button type="button" class="btn-close"
+											data-bs-dismiss="modal" aria-label="Close"></button>
+									</div>
+									<div class="modal-body" style="text-align: left;">
+										<form
+											th:action="@{'/students/' + ${student.id} + '/updateMyData'}"
+											method="post">
+											<div class="mb-3">
+												<label for="newDni" class="form-label">DNI: </label> <input
+													type="text" class="form-control" name="newDni"
+													th:value="*{student.dni}">
+											</div>
+
+											<div class="mb-3">
+												<label for="newPhone" class="form-label">Telefono: </label>
+												<input type="text" class="form-control" name="newPhone"
+													th:value="*{student.phoneNumber}">
+											</div>
+											<div class="mb-3">
+												<label for="newemailPersonal" class="form-label">Correo
+													Personal: </label> <input type="text" class="form-control"
+													name="newemailPersonal" th:value="*{student.emailPersonal}">
+											</div>
+											<div class="mb-3">
+												<label for="newemailUniversity" class="form-label">Correo
+													Universitario: </label> <input type="text" class="form-control"
+													name="newemailUniversity"
+													th:value="*{student.emailUniversity}">
+											</div>
+											<div style="display: none">
+												<div class="mb-3">
+													<label for="newID" class="form-label">ID: </label> <input
+														type="text" class="form-control" name="newID"
+														th:value="*{student.id}">
+												</div>
+												<div class="mb-3">
+													<label for="newFirstName" class="form-label">firstName:
+													</label> <input type="text" class="form-control"
+														name="newFirstName" th:value="*{student.firstName}">
+												</div>
+												<div class="mb-3">
+													<label for="newLastName" class="form-label">lastName:
+													</label> <input type="text" class="form-control" name="newLastName"
+														th:value="*{student.lastName}">
+												</div>
+
+												<div class="mb-3">
+													<label for="newCycle" class="form-label">Cycle: </label> <input
+														type="text" class="form-control" name="newCycle"
+														th:value="*{student.cycle}">
+												</div>
+
+												<div class="mb-3">
+													<label for="newCreditAmount" class="form-label">CreditAmount:
+													</label> <input type="text" class="form-control"
+														name="newCreditAmount" th:value="*{student.creditAmount}">
+												</div>
+												<div class="mb-3">
+													<label for="newCareer" class="form-label">Carrera</label> <select
+														class="form-select" th:value="*{student.career.name}"
+														name="newCareer" required>
+														<option th:each="career : ${careers}"
+															th:value="${career.id}" th:text="${career.name}"></option>
+													</select>
+												</div>
+											</div>
+											<div class="mt-5" style="text-align: right;">
+												<button type="button" class="btn btn-secondary"
+													data-bs-dismiss="modal">Cancelar</button>
+												<button type="submit" class="btn"
+													style="background-color: #18A0FB; color: white">Editar</button>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="modal fade" th:id="*{'staticBackdrop2'+{teacher.id}}"
+							sec:authorize="hasRole('ROLE_TEACHER')" data-bs-backdrop="static"
+							data-bs-keyboard="false" tabindex="-1"
+							aria-labelledby="staticBackdropLabel" aria-hidden="true">
+							<div class="modal-dialog modal-dialog-scrollable">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="staticBackdropLabel">Editar
+											Datos Profesor</h5>
+										<button type="button" class="btn-close"
+											data-bs-dismiss="modal" aria-label="Close"></button>
+									</div>
+									<div class="modal-body" style="text-align: left;">
+										<form
+											th:action="@{'/teachers/' + ${teacher.id} + '/updateMyData'}"
+											method="post">
+
+											<div class="mb-3">
+												<label for="newPhone" class="form-label">Telefono: </label>
+												<input type="text" class="form-control" name="newPhone"
+													th:value="*{teacher.phoneNumber}">
+											</div>
+											<div class="mb-3">
+												<label for="newemailUniversity" class="form-label">Correo
+													Universitario: </label> <input type="text" class="form-control"
+													name="newemailUniversity"
+													th:value="*{teacher.emailUniversity}">
+											</div>
+											<div style="display: none">
+												<div class="mb-3">
+													<label for="newDni" class="form-label">DNI: </label> <input
+														type="text" class="form-control" name="newDni"
+														th:value="*{teacher.dni}">
+												</div>
+												<div class="mb-3">
+													<label for="newID" class="form-label">ID: </label> <input
+														type="text" class="form-control" name="newID"
+														th:value="*{teacher.id}">
+												</div>
+												<div class="mb-3">
+													<label for="newFirstName" class="form-label">firstName:
+													</label> <input type="text" class="form-control"
+														name="newFirstName" th:value="*{teacher.firstName}">
+												</div>
+												<div class="mb-3">
+													<label for="newLastName" class="form-label">lastName:
+													</label> <input type="text" class="form-control" name="newLastName"
+														th:value="*{teacher.lastName}">
+												</div>
+
+												<div class="mb-3">
+													<label for="newCareer" class="form-label">Carrera</label> <select
+														class="form-select" th:value="*{teacher.career.name}"
+														name="newCareer" required>
+														<option th:each="career : ${careers}"
+															th:value="${career.id}" th:text="${career.name}"></option>
+													</select>
+												</div>
+											</div>
+											<div class="mt-5" style="text-align: right;">
+												<button type="button" class="btn btn-secondary"
+													data-bs-dismiss="modal">Cancelar</button>
+												<button type="submit" class="btn"
+													style="background-color: #18A0FB; color: white">Editar</button>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
 						<p class="col-md-8 fs-4">
-							ID: <span th:text="${teacher.id}"></span>
+							Nombre de Usuario: <span sec:authentication="name"></span>
 						</p>
-						<p class="col-md-8 fs-4">
-							Nombres: <span
-								th:text="${teacher.firstName + ' ' + teacher.lastName}"></span>
+						<div sec:authorize="hasRole('ROLE_TEACHER')">
+							<p class="col-md-8 fs-4">
+								Nombres: <span
+									th:text="${teacher.firstName + ' ' + teacher.lastName}"></span>
+							</p>
+							<p class="col-md-8 fs-4">
+								Correo Universitario: <span th:text="${teacher.emailUniversity}"></span>
+							</p>
+							<p class="col-md-8 fs-4">
+								Teléfono: <span th:text="${teacher.phoneNumber}"></span>
+							</p>
+						</div>
+						<p sec:authorize="hasRole('ROLE_STUDENT')"
+							class="col-md-8 fs-4 fw-bold">
+							Nombres y Apellidos: <span
+								th:text="${student.firstName + ' ' + student.lastName}"
+								class="fst-normal"></span> <br /> DNI: <span
+								th:text="${student.dni}" class="fst-normal"></span> <br />
+							Numero de Telefono: <span th:text="${student.phoneNumber}"
+								class="fst-normal"></span> <br /> Correo Personal: <span
+								th:text="${student.emailPersonal}" class="fst-normal"></span> <br />
+							Correo Universitario: <span th:text="${student.emailUniversity}"
+								class="fst-normal"></span> <br /> Carrera: <span
+								th:text="${student.career.name}" class="fst-normal"></span> <br />
 						</p>
+
 					</div>
-					<p sec:authorize="hasRole('ROLE_STUDENT')"
-						class="col-md-8 fs-4 fw-bold">
-						Nombres y Apellidos: <span
-							th:text="${student.firstName + ' ' + student.lastName}"
-							class="fst-normal"></span> <br /> DNI: <span
-							th:text="${student.dni}" class="fst-normal"></span> <br />
-						Numero de Telefono: <span th:text="${student.phoneNumber}"
-							class="fst-normal"></span> <br /> Correo Personal: <span
-							th:text="${student.emailPersonal}" class="fst-normal"></span> <br />
-						Correo Universitario: <span th:text="${student.emailUniversity}"
-							class="fst-normal"></span> <br /> Carrera: <span
-							th:text="${student.career.name}" class="fst-normal"></span> <br />
-					</p>
-
+				</div>
+				<div class="columnaDerechaViewProfile">
+					<img sec:authorize="hasRole('ROLE_TEACHER')"
+						th:src="@{/img/imgProfesor.png}" /> <img
+						sec:authorize="hasRole('ROLE_STUDENT')"
+						th:src="@{/img/imgUser.png}" width="75%" />
 				</div>
 			</div>
+		</div>
 
-		</section>
-
-	</main>
-	<footer th:replace="layout/layout :: frag-footer"></footer>
+		<footer th:replace="layout/layout :: frag-footer"></footer>
+	</section>
 
 </body>
 </html>

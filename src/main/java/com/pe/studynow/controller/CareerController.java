@@ -58,8 +58,8 @@ public class CareerController {
 		} else {
 			int rpta = careerService.insert(career);
 			if (rpta > 0) {
-				model.addAttribute("mensaje", "Ya existe");
-				return "courses/courses";
+				model.addAttribute("mensaje", "Ya existe esta carrera");
+				return "careers/careers";
 			} else {
 				redirectAttrs.addFlashAttribute("mensaje", "Se guardo correctamente").addFlashAttribute("clase",
 						"sucess");

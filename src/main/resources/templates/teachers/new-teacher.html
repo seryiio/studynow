@@ -49,8 +49,9 @@
 									<label for="teacher.id" class="form-label">Codigo</label> <input
 										id="codigoProfesor1" type="text" class="form-control"
 										th:field="*{teacher.id}" onkeyup="PasarValor();"
-										th:errorclass="'form-control alert-danger'" placeholder="Ejemplo: prcopa" required>
-									<small class="form-text text-danger"
+										th:errorclass="'form-control alert-danger'"
+										placeholder="Ejemplo: prcopa" required> <small
+										class="form-text text-danger"
 										th:if="${#fields.hasErrors('teacher.id')}"
 										th:errors="*{teacher.id}"></small>
 								</div>
@@ -106,13 +107,12 @@
 
 								<div class="mb-3">
 									<label for="teacher.career" class="form-label">Carrera</label>
-									<select class="form-select" th:field="*{teacher.career}" th:errorclass="'form-control alert-danger'"
-										required>
+									<select class="form-select" th:field="*{teacher.career}"
+										th:errorclass="'form-control alert-danger'" required>
 										<option value="">Elige una Carrera</option>
 										<option th:each="career : ${careers}" th:value="${career.id}"
 											th:text="${career.name}"></option>
-									</select>
-									<small class="form-text text-danger" 
+									</select> <small class="form-text text-danger"
 										th:if="${#fields.hasErrors('teacher.career')}"
 										th:errors="*{teacher.career}"></small>
 								</div>
@@ -121,6 +121,7 @@
 										style="background-color: #18A0FB; color: white">Agregar
 										Datos Profesor</button>
 								</div>
+								<p th:text="${mensaje}" class="form-text text-danger"></p>
 							</form>
 						</div>
 					</div>

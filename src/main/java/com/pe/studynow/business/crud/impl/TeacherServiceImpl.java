@@ -28,7 +28,7 @@ public class TeacherServiceImpl implements TeacherService{
 	@Override
 	@Transactional
 	public Integer insert(Teacher teacher) {
-		int rpta = teacherRepository.buscarNombreProfesor(teacher.getFirstName());
+		int rpta = teacherRepository.buscarDNIProfesor(teacher.getDni());
 		if (rpta == 0) {
 			teacherRepository.save(teacher);
 		}
