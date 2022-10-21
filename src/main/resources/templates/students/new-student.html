@@ -115,6 +115,26 @@
 								</div>
 
 								<div class="mb-3">
+									<label for="student.cycle" class="form-label">Ciclo</label>
+									<input type="text" class="form-control"
+										th:field="*{student.cycle}"
+										th:errorclass="'form-control alert-danger'" required>
+									<small class="form-text text-danger"
+										th:if="${#fields.hasErrors('student.cycle')}"
+										th:errors="*{student.cycle}"></small>
+								</div>
+								
+								<div class="mb-3">
+									<label for="student.creditAmount" class="form-label">Cantidad de Creditos</label>
+									<input type="text" class="form-control"
+										th:field="*{student.creditAmount}"
+										th:errorclass="'form-control alert-danger'" required>
+									<small class="form-text text-danger"
+										th:if="${#fields.hasErrors('student.creditAmount')}"
+										th:errors="*{student.creditAmount}"></small>
+								</div>
+
+								<div class="mb-3">
 									<label for="student.career" class="form-label">Carrera</label>
 									<select class="form-select" th:field="*{student.career}"
 										required>
