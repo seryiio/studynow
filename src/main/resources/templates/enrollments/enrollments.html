@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: frag-head">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Matricula</title>
+</head>
+<body>
+	<header th:replace="layout/layout :: frag-header"></header>
+	<section>
+		<div class="card">
+			<div class="card-body row">
+				<div class="ms-2 me-auto col mt-2 mb-2">
+					<div class="fw-bold">Alumno:</div>
+					<p th:text="${student.firstName + ' ' + student.lastName}"></p>
+				</div>
+				<div class="ms-2 me-auto col mt-2 mb-2">
+					<div class="fw-bold">Creditos Maximos:</div>
+					<p th:text="${student.creditAmount}"></p>
+				</div>
+				<div class="ms-2 me-auto col mt-2 mb-2">
+					<div class="fw-bold">Ciclo:</div>
+					<p th:text="${student.cycle}"></p>
+				</div>
+				<div class="ms-2 me-auto col mt-2 mb-2">
+					<div class="fw-bold">Carrera:</div>
+					<p th:text="${student.career.name}"></p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<div class="alert alert-success alert-dismissible fade show"
+		th:classappend="'alert-' + (${clase != null} ? ${clase} : info)"
+		th:if="${mensaje != null}" th:text="${mensaje}">
+		<button type="button" class="btn-close" data-bs-dismiss="alert"
+			aria-label="Close"></button>
+	</div>
+
+	<section class="container-fluid">
+		<div class="row justify-content-center">
+			<div class="col-xl-4 col-md-6 card text-center ms-5 me-5 mb-3 mt-5 "
+				style="width: 50rem">
+				<div class="card-header text-start" style="background-color: white">Lista
+					de Cursos</div>
+				<div class="card-body">
+					<table class="table table-bordered">
+						<thead class="bg-light">
+							<tr>
+								<th scope="col">Ciclo</th>
+								<th scope="col">Curso</th>
+								<th scope="col">Creditos</th>
+							</tr>
+						</thead>
+
+						<tbody>
+							<tr th:each="course : ${courses}" th:if="${course.cycle == student.cycle && course.career.name == student.career.name}">
+								<td th:text="${course.cycle}"></td>
+								<td><a class="btn" data-bs-toggle="modal"
+									th:attr="data-bs-target='#staticBackdrop'+*{course.id}" role="button"><i
+										th:text="${course.name}"></i></a>
+									<div class="modal fade" th:id="*{'staticBackdrop'+{course.id}}"
+										data-bs-backdrop="static" data-bs-keyboard="false"
+										tabindex="-1" aria-labelledby="staticBackdropLabel"
+										aria-hidden="true">
+										<div
+											class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h5 class="modal-title" id="staticBackdropLabel">Elegir
+														una Seccion</h5>
+													<button type="button" class="btn-close"
+														data-bs-dismiss="modal" aria-label="Close"></button>
+												</div>
+												<div class="modal-body">
+													<form th:action="@{/enrollments/savenew}"
+														th:object="${enrollment}" method="post" class="card-body">
+
+														<table
+															class="table align-middle mb-0 mt-3 bg-white text-center table-bordered">
+															<thead>
+																<tr style="background-color: #0ACF83; color: white">
+																	<th scope="col"></th>
+																	<th scope="col">Docente</th>
+																	<th scope="col">Seccion</th>
+																	<th scope="col">Hora</th>
+																	<th scope="col">Vacantes</th>
+																</tr>
+															</thead>
+															<tbody class="justify-content-center" style="text-align: center;">
+																<tr th:each="section : ${sections}" th:if="${course.id == section.course.id}">
+																	<td>
+																		<div class="form-check" >
+																			<input class="form-check-input" type="radio"
+																				name="flexRadioDefault" id="flexRadioDefault1"
+																				th:field="*{section}" th:value="${section.id}">
+																			<label class="form-check-label"
+																				for="flexRadioDefault1"></label>
+																		</div>
+																	</td>
+																	<td
+																		th:text="${section.teacher.firstName + ' ' + section.teacher.lastName}"></td>
+																	<td th:text="${section.name}"></td>
+																	<td
+																		th:text="${section.startTime + ' - ' + section.endTime}"></td>
+																	<td th:text="${section.vacancies}"></td>
+
+																</tr>
+															</tbody>
+
+														</table>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-secondary"
+																data-bs-dismiss="modal">Cancelar</button>
+															<button class="btn" type="submit"
+																style="background-color: #18A0FB; color: white">Grabar</button>
+														</div>
+													</form>
+												</div>
+											</div>
+										</div>
+									</div></td>
+								<td th:text="${course.numberCredits}"></td>
+							</tr>
+						</tbody>
+					</table>
+
+				</div>
+			</div>
+			<div class="col-xl-4 col-md-6 card text-center ms-5 me-5 mb-3 mt-5"
+				style="width: 50rem">
+				<div class="card-header text-start" style="background-color: white">Cursos
+					Matriculados</div>
+				<div class="card-body">
+
+					<table class="table table-striped">
+						<thead class="bg-light">
+							<tr>
+								<th scope="col">Curso</th>
+								<th scope="col">Creditos</th>
+								<th scope="col">Seccion</th>
+								<th scope="col" colspan="3">Hora</th>
+								<th scope="col"></th>
+							</tr>
+						</thead>
+
+						<tbody>
+							<tr th:each="enrollment : ${enrollments}">
+								<th scope="row" th:text="${enrollment.section.course.name}"></th>
+								<td th:text="${enrollment.section.course.numberCredits}"></td>
+								<td th:text="${enrollment.section.name}"></td>
+								<td th:text="${enrollment.section.startTime}"></td>
+								<td>-</td>
+								<td th:text="${enrollment.section.endTime}"></td>
+								<td><a class="btn" type="submit"
+									th:href="@{'/enrollments/' + ${enrollment.id} + '/delete'}"
+									style="background-color: transparent; color: #18A0FB"
+									onclick="return confirm('¿Estás seguro de eliminar la sección?')"><i
+										class="fa-solid fa-trash-can"></i></a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="text-muted d-flex justify-content-center mt-3 mb-3">
+					<button type="button" class="btn" data-bs-toggle="modal"
+						data-bs-target="#schedule"
+						style="background-color: #18A0FB; color: white">
+						<i class="fa-solid fa-calendar"></i> Ver Horario
+					</button>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<footer th:replace="layout/layout :: frag-footer"> </footer>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: frag-head">
+<meta charset="utf-8">
+<title>Lista de Alumnos</title>
+</head>
+<header th:replace="layout/layout :: frag-header"></header>
+<section class="px-3">
+	<div class="card-body" style="text-align: left;">
+
+		<div class="col-md-1 align-self-start mt-5"
+			style="text-align: center;">
+			<a class="btn" th:href="@{/students/new}" role="button"
+				style="background-color: #18A0FB; color: white">Agregar</a>
+		</div>
+
+	</div>
+</section>
+<hr>
+<section class="px-5">
+	<div class="d-flex justify-content-end">
+		<a href="" class="btn btn-lg disabled" tabindex="-1" role="button"
+			id="button1" aria-disabled="true"
+			style="background-color: #18A0FB; color: white">Borrar Todo</a>
+	</div>
+	<table class="table align-middle mb-0 mt-3 bg-white text-center">
+		<thead class="bg-light">
+			<tr class="table">
+				<th scope="col"></th>
+				<th scope="col">Codigo</th>
+				<th scope="col">Nombre</th>
+				<th scope="col">Apellido</th>
+				<th scope="col">DNI</th>
+				<th scope="col">Celular</th>
+				<th scope="col">Correo Personal</th>
+				<th scope="col">Correo Universitario</th>
+				<th scope="col">Carrera</th>
+				<th scope="col">Acciones</th>
+			</tr>
+		<tbody>
+			<tr th:each="student : ${students}">
+				<td class="text-center"><input class="form-check-input"
+					type="checkbox" onclick="javacript:EnableDisableButton(this);"
+					th:field="*{students}" th:value="${student.id}"></td>
+				<td th:text="${student.id}"></td>
+				<td th:text="${student.firstName}"></td>
+				<td th:text="${student.lastName}"></td>
+				<td th:text="${student.dni}"></td>
+				<td th:text="${student.phoneNumber}"></td>
+				<td th:text="${student.emailPersonal}"></td>
+				<td th:text="${student.emailUniversity}"></td>
+				<td th:text="${student.career.name}"></td>
+				<td><a class="btn" type="submit"
+					th:href="@{'/students/' + ${student.id} + '/edit'}"
+					style="background-color: transparent; color: #18A0FB"><i
+						class="fa-regular fa-pen-to-square"></i></a> <a class="btn"
+					type="submit" th:href="@{'/students/' + ${student.id} + '/delete'}"
+					style="background-color: transparent; color: #18A0FB"
+					onclick="return confirm('¿Estás seguro de eliminar el alumno?')"><i
+						class="fa-solid fa-trash-can"></i></a></td>
+			</tr>
+		</tbody>
+	</table>
+	<div class="row d-flex justify-content-center">
+		<div class="col-md-4" style="text-align: center;"></div>
+		<div class="col-md-4" style="text-align: center;"></div>
+	</div>
+</section>
+<footer th:replace="layout/layout :: frag-footer"></footer>
+</body>
+</html>

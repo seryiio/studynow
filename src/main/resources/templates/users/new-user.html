@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+<link th:href="@{/css/solid.min.css}" rel="stylesheet">
+<title>Nuevo Usuario</title>
+<script type="text/javascript">    
+	function PasarValor()
+	{
+	document.getElementById("codigoProfesor2").value = document.getElementById("codigoProfesor1").value;
+	}
+</script>
+<style>
+.bd-placeholder-img {
+	font-size: 1.125rem;
+	text-anchor: middle;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	user-select: none;
+}
+
+@media ( min-width : 768px) {
+	body {
+		background-color: #EFEFEF;
+		font-family: 'Abel', sans-serif;
+		font-size: 16px;
+	}
+	.bd-placeholder-img-lg {
+		font-size: 3.5rem;
+	}
+	.perfil:hover {
+		background-color: #18A0FB;
+	}
+}
+</style>
+</head>
+<body>
+	<header th:replace="layout/layout :: frag-header"></header>
+	<main>
+		<section>
+			<div class="container">
+				<div class="row justify-content-center align-items-center">
+
+					<div class="card mt-2" style="width: 40rem;">
+						<div class="card-body">
+							<h5 class="card-title">Agregar Usuario</h5>
+							<form th:action="@{/users/save}" method="post" novalidate>
+
+								<div class="mb-3">
+									<label for="user.idSegment" class="form-label">Codigo
+										del Usuario (Profesor / Estudiante)</label> <input id="codigoProfesor2" type="text"
+										class="form-control" th:field="*{user.idSegment}"
+										th:errorclass="'form-control alert-danger'" required>
+									<small class="form-text text-danger"
+										th:if="${#fields.hasErrors('user.idSegment')}"
+										th:errors="*{user.idSegment}"></small>
+								</div>
+
+								<div class="mb-3">
+									<label for="user.username" class="form-label">Nombre de
+										Usuario</label> <input type="text" class="form-control"
+										th:field="*{user.username}"
+										th:errorclass="'form-control alert-danger'" placeholder="Ejemplo: u202012145(estudiante) / prcopa(profesor))" required>
+									<small class="form-text text-danger"
+										th:if="${#fields.hasErrors('user.username')}"
+										th:errors="*{user.username}"></small>
+								</div>
+
+								<div class="mb-3">
+									<label for="user.password" class="form-label">Contraseña</label>
+									<input type="password" class="form-control"
+										th:field="*{user.password}"
+										th:errorclass="'form-control alert-danger'" required>
+									<small class="form-text text-danger"
+										th:if="${#fields.hasErrors('user.password')}"
+										th:errors="*{user.password}"></small>
+								</div>
+
+								<div class="mb-3">
+									<label for="user.segment" class="form-label">Segmento</label> <select
+										class="form-select" th:field="*{user.segment}" required>
+										<option selected disabled value="">Elegir...</option>
+										<option th:each="segment : ${segments}" th:value="${segment}"
+											th:text="${segment}">...</option>
+									</select>
+								</div>
+								<div class="mt-5 text-center" style="text-align: right;">
+									<button type="submit" class="btn"
+										style="background-color: #18A0FB; color: white">Agregar
+										Usuario</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+	<footer th:replace="layout/layout :: frag-footer"></footer>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: frag-head">
+<meta charset="ISO-8859-1">
+<title>Editar Profesor</title>
+</head>
+<body>
+	<header th:replace="layout/layout :: frag-header"></header>
+	<main>
+		<section>
+			<div class="container">
+				<div class="row justify-content-center align-items-center ">
+					<div class="card mx-2 mt-2" style="width: 40rem;">
+						<div class="card-body">
+							<h5 class="card-title">Editar Datos Profesor</h5>
+							<form th:action="@{'/teachers/' + ${teacher.id} + '/update'}"
+								th:object="${teacher}" method="post"
+								class="row g-3 needs-validation" novalidate>
+								<div class="mb-3">
+									<label for="id" class="form-label">Codigo</label> <input
+										type="text" class="form-control" th:field="*{id}" required>
+								</div>
+								<div class="mb-3">
+									<label for="lastName" class="form-label">Apellidos</label> <input
+										type="text" class="form-control" th:field="*{lastName}"
+										required>
+								</div>
+								<div class="mb-3">
+									<label for="firstName" class="form-label">Nombres</label> <input
+										type="text" class="form-control" th:field="*{firstName}"
+										required>
+								</div>
+								<div class="mb-3">
+									<label for="dni" class="form-label">DNI</label> <input
+										type="text" class="form-control" th:field="*{dni}" required>
+								</div>
+								<div class="mb-3">
+									<label for="phoneNumber" class="form-label">Numero</label> <input
+										type="text" class="form-control" th:field="*{phoneNumber}"
+										required>
+								</div>
+								<div class="mb-3">
+									<label for="emailUniversity" class="form-label">Correo
+										Universitario</label> <input type="text" class="form-control"
+										th:field="*{emailUniversity}" required>
+								</div>
+
+								<div class="mb-3">
+									<label for="career" class="form-label">Carrera</label> <select
+										class="form-select" th:field="*{career}" required>
+										<option value="">Elige una carrera</option>
+										<option th:each="career : ${careers}" th:value="${career.id}"
+											th:text="${career.name}"></option>
+									</select>
+								</div>
+
+								<div class="mt-5 text-center" style="text-align: right;">
+									<button type="submit" class="btn"
+										style="background-color: #18A0FB; color: white">Editar
+										Datos Profesor</button>
+								</div>	
+							</form>
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+		</section>
+	</main>
+	<footer th:replace="layout/layout :: frag-footer"></footer>
+</body>
+</html>

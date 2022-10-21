@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+<link th:href="@{/css/solid.min.css}" rel="stylesheet">
+<title>Nuevo Profesor</title>
+<script type="text/javascript">    
+	function PasarValor()
+	{
+	document.getElementById("codigoProfesor2").value = document.getElementById("codigoProfesor1").value;
+	}
+</script>
+<style>
+.bd-placeholder-img {
+	font-size: 1.125rem;
+	text-anchor: middle;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	user-select: none;
+}
+
+@media ( min-width : 768px) {
+	body {
+		background-color: #EFEFEF;
+		font-family: 'Abel', sans-serif;
+		font-size: 16px;
+	}
+	.bd-placeholder-img-lg {
+		font-size: 3.5rem;
+	}
+	.perfil:hover {
+		background-color: #18A0FB;
+	}
+}
+</style>
+</head>
+<body>
+	<header th:replace="layout/layout :: frag-header"></header>
+	<main>
+		<section>
+			<div class="container">
+				<div class="row justify-content-center align-items-center ">
+					<div class="card mx-2 mt-2" style="width: 40rem;">
+						<div class="card-body">
+							<h5 class="card-title">Agregar Datos Profesor</h5>
+							<form th:action="@{/teachers/save}" method="post" novalidate>
+								<div class="mb-3">
+									<label for="teacher.id" class="form-label">Codigo</label> <input
+										id="codigoProfesor1" type="text" class="form-control"
+										th:field="*{teacher.id}" onkeyup="PasarValor();"
+										th:errorclass="'form-control alert-danger'" placeholder="Ejemplo: prcopa" required>
+									<small class="form-text text-danger"
+										th:if="${#fields.hasErrors('teacher.id')}"
+										th:errors="*{teacher.id}"></small>
+								</div>
+
+								<div class="mb-3">
+									<label for="teacher.firstName" class="form-label">Nombres</label>
+									<input type="text" class="form-control"
+										th:field="*{teacher.firstName}"
+										th:errorclass="'form-control alert-danger'" required>
+									<small class="form-text text-danger"
+										th:if="${#fields.hasErrors('teacher.firstName')}"
+										th:errors="*{teacher.firstName}"></small>
+								</div>
+
+								<div class="mb-3">
+									<label for="teacher.lastName" class="form-label">Apellidos</label>
+									<input type="text" class="form-control"
+										th:field="*{teacher.lastName}"
+										th:errorclass="'form-control alert-danger'" required>
+									<small class="form-text text-danger"
+										th:if="${#fields.hasErrors('teacher.lastName')}"
+										th:errors="*{teacher.lastName}"></small>
+								</div>
+
+								<div class="mb-3">
+									<label for="teacher.dni" class="form-label">DNI</label> <input
+										type="text" class="form-control" th:field="*{teacher.dni}"
+										th:errorclass="'form-control alert-danger'" required>
+									<small class="form-text text-danger"
+										th:if="${#fields.hasErrors('teacher.dni')}"
+										th:errors="*{teacher.dni}"></small>
+								</div>
+
+								<div class="mb-3">
+									<label for="teacher.phoneNumber" class="form-label">Celular</label>
+									<input type="text" class="form-control"
+										th:field="*{teacher.phoneNumber}"
+										th:errorclass="'form-control alert-danger'" required>
+									<small class="form-text text-danger"
+										th:if="${#fields.hasErrors('teacher.phoneNumber')}"
+										th:errors="*{teacher.phoneNumber}"></small>
+								</div>
+
+								<div class="mb-3">
+									<label for="teacher.emailUniversity" class="form-label">Correo</label>
+									<input type="text" class="form-control"
+										th:field="*{teacher.emailUniversity}"
+										th:errorclass="'form-control alert-danger'" required>
+									<small class="form-text text-danger"
+										th:if="${#fields.hasErrors('teacher.emailUniversity')}"
+										th:errors="*{teacher.emailUniversity}"></small>
+								</div>
+
+								<div class="mb-3">
+									<label for="teacher.career" class="form-label">Carrera</label>
+									<select class="form-select" th:field="*{teacher.career}"
+										required>
+										<option value="">Elige una Carrera</option>
+										<option th:each="career : ${careers}" th:value="${career.id}"
+											th:text="${career.name}"></option>
+									</select>
+								</div>
+								<div class="mt-5 text-center" style="text-align: right;">
+									<button type="submit" class="btn"
+										style="background-color: #18A0FB; color: white">Agregar
+										Datos Profesor</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+	<footer th:replace="layout/layout :: frag-footer"></footer>
+</body>
+</html>

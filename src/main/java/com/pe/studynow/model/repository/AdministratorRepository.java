@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.pe.studynow.model.entity.Administrator;
 
 @Repository
-public interface AdministratorRepository extends JpaRepository<Administrator, Integer>{
+public interface AdministratorRepository extends JpaRepository<Administrator, String>{
 
 }

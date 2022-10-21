@@ -10,4 +10,7 @@ public interface SectionService extends CrudService<Section, Integer>{
 	public Integer deleteSections(Integer id);
 	
 	List<Section> list();
+	
+	List<Section> findByTeacher(String id) throws Exception;
+
 }

@@ -20,10 +20,15 @@
 
 @media ( min-width : 768px) {
 	body {
+		background-color: #EFEFEF;
+		font-family: 'Abel', sans-serif;
 		font-size: 16px;
 	}
 	.bd-placeholder-img-lg {
 		font-size: 3.5rem;
+	}
+	.perfil:hover {
+		background-color: #18A0FB;
 	}
 }
 </style>
@@ -46,9 +51,11 @@
 					<ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-5">
 						<li class="nav-item"><a class="nav-link" style="color: white"
 							th:href="@{/main}"> Inicio</a></li>
-						<li class="nav-item"><a class="nav-link" style="color: white"
-							th:href="@{/enrollment}"> Matricula</a></li>
-						<li class="nav-item dropdown"><a
+						<li sec:authorize="hasRole('ROLE_STUDENT')" class="nav-item"><a
+							class="nav-link" style="color: white" th:href="@{/enrollments}">
+								Matricula</a></li>
+						<li sec:authorize="hasRole('ROLE_ADMINISTRATOR')"
+							class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" href="/" id="navbarDropdown"
 							role="button" data-bs-toggle="dropdown" aria-expanded="false"
 							style="color: white"> Tablas </a>
@@ -61,10 +68,22 @@
 								<li><a class="dropdown-item" th:href="@{/users}">Usuarios</a></li>
 							</ul></li>
 					</ul>
-					<button type="button" class="btn bw-bold"
-						style="background-color: transparent; color: white"
-						data-bs-toggle="modal" data-bs-target="#exampleModal">
-						Cerrar Sesion</button>
+
+					<div class="dropdown" sec:authorize="isAuthenticated()">
+						<a class="btn btn-outline dropdown-toggle perfil" href="#"
+							role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
+							aria-expanded="false" style="color: white; border-color: white;">
+							<span sec:authentication="name"></span>
+						</a>
+						<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+							<li><a class="dropdown-item"
+								th:href="@{/users/view-profile}">Ver Perfil</a></li>
+							<li><hr class="dropdown-divider"></li>
+							<li><a class="dropdown-item" th:href="@{/logout}"
+								data-bs-toggle="modal" data-bs-target="#exampleModal">Cerrar
+									Sesión</a></li>
+						</ul>
+					</div>
 				</div>
 			</div>
 

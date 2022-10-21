@@ -14,4 +14,5 @@ public interface CourseRepository extends JpaRepository<Course, Integer>{
 	
 	@Query(value="delete from courses where id IN (=:cursos)", nativeQuery = true)
 	public int eliminarMuchosCurso(@Param("cursos") Integer nombreCursosEliminar);
+
 }

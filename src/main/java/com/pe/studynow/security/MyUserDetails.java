@@ -68,7 +68,7 @@ public class MyUserDetails implements UserDetails {
 	public Segment getSegment() {
 		return this.user.getSegment();
 	}
-	public Integer getIdSegment() {
+	public String getIdSegment() {
 		return this.user.getIdSegment();
 	}
 	

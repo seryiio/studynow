@@ -3,8 +3,10 @@ package com.pe.studynow.business.crud.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.pe.studynow.business.crud.StudentService;
 import com.pe.studynow.model.entity.Student;
@@ -17,12 +19,25 @@ public class StudentServiceImpl implements StudentService{
 	private StudentRepository studentRepository;
 	
 	@Override
-	public JpaRepository<Student, Integer> getJpaRepository() {
+	public JpaRepository<Student, String> getJpaRepository() {
 		return this.studentRepository;
 	}
 
+
 	@Override
-	public List<Student> findByLastNameAndFirstName(String lastName, String firstName) throws Exception {
-		return this.studentRepository.findByLastNameAndFirstName(lastName, firstName);
+	@Transactional
+	public Integer insert(Student student) {
+		int rpta = studentRepository.buscarNombreEstudiante(student.getLastName());
+		if (rpta == 0) {
+			studentRepository.save(student);
+		}
+		return rpta;
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Student> list() {
+		// TODO Auto-generated method stub
+		return studentRepository.findAll(Sort.by(Sort.Direction.DESC, "name"));
 	}
 }

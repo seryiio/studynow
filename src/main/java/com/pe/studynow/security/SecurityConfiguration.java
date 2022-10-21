@@ -36,16 +36,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		auth.authenticationProvider(authenticationProvider());
 	}
 
+	//Restringir acceso a la pagina
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
 		// Aqui realiza la configuración de los permisos
 				.antMatchers("/").permitAll()
 				.antMatchers("/careers/**").hasRole("ADMINISTRATOR")
-				.antMatchers("/courses/**").hasRole("ADMINISTRATOR")
 				.antMatchers("/students/**").hasRole("ADMINISTRATOR")
-				.antMatchers("/teachers/**").hasRole("ADMINISTRATOR")
 				.antMatchers("/students/**/edit").hasAnyAuthority("ACCESS_EDIT_MATRI", "ACCESS_ALL")
+				.antMatchers("/courses/list").hasRole("TEACHER")
 				.antMatchers("/enrollments/**").hasRole("STUDENT")
 
 				.antMatchers("/main").permitAll()

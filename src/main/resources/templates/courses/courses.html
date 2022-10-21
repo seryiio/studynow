@@ -13,9 +13,19 @@
 			<div class="col-md-4 align-self-start">
 				<label for="name" class="form-label">Nombre del Curso</label> <input
 					type="text" class="form-control" id="name" th:field="*{name}"
-					th:errorclass="'form-control alert-danger'"> <small
+					th:errorclass="'form-control alert-danger'"
+					placeholder="Ejemplo: Programación I"> <small
 					class="form-text text-danger" th:if="${#fields.hasErrors('name')}"
 					th:errors="*{name}"></small>
+			</div>
+
+			<div class="col-md-2 align-self-start">
+				<label for="cycle" class="form-label">Ciclo</label> <input
+					type="text" class="form-control" id="cycle" th:field="*{cycle}"
+					th:errorclass="'form-control alert-danger'"> <small
+					class="form-text text-danger" th:if="${#fields.hasErrors('cycle')}"
+					th:errors="*{cycle}"></small>
+
 			</div>
 
 			<div class="col-md-2 align-self-start">
@@ -59,6 +69,7 @@
 			<tr class="table">
 				<th scope="col"></th>
 				<th scope="col">Curso</th>
+				<th scope="col">Ciclo</th>
 				<th scope="col">Creditos</th>
 				<th scope="col">Carrera</th>
 				<th scope="col">Acciones</th>
@@ -69,13 +80,63 @@
 					type="checkbox" onclick="javacript:EnableDisableButton(this);"
 					th:field="*{courses}" th:value="${course.id}"></td>
 				<td th:text="${course.name}"></td>
+				<td th:text="${course.cycle}"></td>
 				<td th:text="${course.numberCredits}"></td>
 				<td th:text="${course.career.name}"></td>
-				<td><a class="btn" type="submit"
-					th:href="@{'/courses/' + ${course.id} + '/edit'}"
+				<td><a class="btn" type="submit" data-bs-toggle="modal"
+					th:attr="data-bs-target='#staticBackdrop'+*{course.id}"
 					style="background-color: transparent; color: #18A0FB"><i
-						class="fa-regular fa-pen-to-square"></i></a> <a class="btn"
-					type="submit" th:href="@{'/courses/' + ${course.id} + '/delete'}"
+						class="fa-regular fa-pen-to-square"></i></a>
+					<div class="modal fade" th:id="*{'staticBackdrop'+{course.id}}"
+						data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+						aria-labelledby="staticBackdropLabel" aria-hidden="true">
+						<div class="modal-dialog modal-dialog-scrollable">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" th:id="*{'staticBackdrop'+{course.id}}">Editar
+										Curso</h5>
+									<button type="button" class="btn-close" data-bs-dismiss="modal"
+										aria-label="Close"></button>
+								</div>
+								<div class="modal-body" style="text-align: left;">
+									<form th:action="@{'/courses/' + ${course.id} + '/update'}"
+										method="post">
+										<div class="mb-3">
+											<label for="newName" class="form-label">Nombre del
+												Curso</label> <input type="text" class="form-control" name="newName"
+												th:value="*{course.name}">
+										</div>
+										<div class="mb-3">
+											<label for="newName" class="form-label">Ciclo</label> <input
+												type="text" class="form-control" name="newCycle"
+												th:value="*{course.cycle}">
+										</div>
+										<div class="mb-3">
+											<label for="newName" class="form-label">Cantidad de
+												Creditos</label> <input type="text" class="form-control"
+												name="newCreditAmount" th:value="*{course.numberCredits}">
+										</div>
+
+										<div class="mb-3">
+											<label for="career" class="form-label">Carrera</label> <select
+												class="form-select" th:value="*{course.career.name}" name="newCareer" required>
+												<option th:each="career : ${careers}"
+													th:value="${career.id}" th:text="${career.name}"></option>
+											</select>
+										</div>
+
+										<div class="mt-5" style="text-align: right;">
+											<button type="button" class="btn btn-secondary"
+												data-bs-dismiss="modal">Cancelar</button>
+											<button type="submit" class="btn"
+												style="background-color: #18A0FB; color: white">Agregar</button>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div> <a class="btn" type="submit"
+					th:href="@{'/courses/' + ${course.id} + '/delete'}"
 					style="background-color: transparent; color: #18A0FB"
 					onclick="return confirm('¿Estás seguro de eliminar el curso?')"><i
 						class="fa-solid fa-trash-can"></i></a></td>

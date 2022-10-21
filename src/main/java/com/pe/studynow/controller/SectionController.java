@@ -20,8 +20,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.pe.studynow.business.crud.CourseService;
 import com.pe.studynow.business.crud.SectionService;
+import com.pe.studynow.business.crud.TeacherService;
 import com.pe.studynow.model.entity.Course;
 import com.pe.studynow.model.entity.Section;
+import com.pe.studynow.model.entity.Teacher;
+import com.pe.studynow.utils.UserAuthentication;
 
 @Controller
 @RequestMapping("/sections")
@@ -29,9 +32,16 @@ import com.pe.studynow.model.entity.Section;
 public class SectionController {
 	@Autowired
 	private SectionService sectionService;
+
+	@Autowired
+	private TeacherService teacherService;
 	
 	@Autowired
 	private CourseService courseService;
+
+	@Autowired
+	private UserAuthentication userAuthentication;
+	
 
 	/*
 	 * @GetMapping public String listCourses(Model model) {
@@ -52,6 +62,8 @@ public class SectionController {
 			model.addAttribute("sections", sections);
 			List<Course> courses  = courseService.getAll();
 			model.addAttribute("courses", courses);
+			List<Teacher> teachers  = teacherService.getAll();
+			model.addAttribute("teachers", teachers);
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -92,6 +104,8 @@ public class SectionController {
 				model.addAttribute("sections", sections);
 				List<Course> courses = courseService.getAll();
 				model.addAttribute("courses", courses);
+				List<Teacher> teachers = teacherService.getAll();
+				model.addAttribute("teachers", teachers);
 			} else {
 				return "redirect:/sections";
 			}
@@ -146,5 +160,21 @@ public class SectionController {
 			e.printStackTrace();
 		}
 		return "redirect:/sections";
+	}
+
+	@GetMapping("mySections")
+	public String getCoursesTeacher(Model model) {
+		if (userAuthentication.isAuthenticated()) { // Enviar los datos del Segmento al html
+			String id = userAuthentication.getIdSegment();
+			try {
+				List<Section> sections = sectionService.findByTeacher(id);
+				model.addAttribute("sections", sections);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return "sections/sections-teacher";
+		}
+		return "redirect:/sections/mySections"; // Fala corregir, genera un bucle infinito
 	}
 }

@@ -19,26 +19,52 @@
 					</div>
 					<div sec:authorize="hasRole('ROLE_TEACHER')" class="col fw-bold">
 						<p
-							th:text="${'Profesor: ' + administrator.firstName + ' ' + administrator.lastName}"></p>
+							th:text="${'Profesor: ' + teacher.firstName + ' ' + teacher.lastName}"></p>
 					</div>
 					<div sec:authorize="hasRole('ROLE_STUDENT')" class="col fw-bold">
 						<p
-							th:text="${'Estudiante: ' + administrator.firstName + ' ' + administrator.lastName}"></p>
+							th:text="${'Estudiante: ' + student.firstName + ' ' + student.lastName}"></p>
 					</div>
 				</div>
 				<div sec:authorize="hasRole('ROLE_ADMINISTRATOR')"
-					class="iconoPerfilBienvenida h-100 d-inline-block mx-2 col-md-4"><i class="fa-solid fa-user-secret"></i>
+					class="iconoPerfilBienvenida h-100 d-inline-block mx-2 col-md-4">
+					<i class="fa-solid fa-user-secret"></i>
 				</div>
 				<div sec:authorize="hasRole('ROLE_STUDENT')"
-					class="iconoPerfilBienvenida h-100 d-inline-block mx-2 col-md-4"><i class="fa-solid fa-user"></i>
+					class="iconoPerfilBienvenida h-100 d-inline-block mx-2 col-md-4">
+					<i class="fa-solid fa-user"></i>
 				</div>
 				<div sec:authorize="hasRole('ROLE_TEACHER')"
-					class="iconoPerfilBienvenida h-100 d-inline-block mx-2 col-md-4"><i class="fa-solid fa-user-tie-hair"></i>
+					class="iconoPerfilBienvenida h-100 d-inline-block mx-2 col-md-4">
+					<i class="fa-solid fa-user-doctor"></i>
 				</div>
 			</div>
-			<div class="col align-self-center" style="text-align: center">
-				<button class="btn w-25" type="submit"
-					style="background-color: #18A0FB; color: white">Perfiles</button>
+			<div sec:authorize="hasRole('ROLE_ADMINISTRATOR')"
+				class="col align-self-center" style="text-align: center">
+				
+				<a class="btn w-25" style="background-color: #18A0FB; color: white"
+					th:href="@{/users}" role="button"> Perfiles de Usuario </a>
+				
+				<a class="btn w-25 ms-5" style="background-color: #18A0FB; color: white"
+					th:href="@{/courses}" role="button"> Cursos </a>
+				<a class="btn w-25 ms-5" style="background-color: #18A0FB; color: white"
+					th:href="@{/sections}" role="button"> Secciones </a>
+			</div>
+			<div sec:authorize="hasRole('ROLE_STUDENT')"
+				class="col align-self-center" style="text-align: center">
+				
+				<a class="btn w-25" style="background-color: #18A0FB; color: white"
+					th:href="@{/users/view-profile}" role="button"> Mi Perfil </a>
+				
+				<a class="btn w-25 ms-5" style="background-color: #18A0FB; color: white"
+					th:href="@{/enrollments}" role="button"> Matricula </a>
+			</div>
+			<div sec:authorize="hasRole('ROLE_TEACHER')"
+				class="col align-self-center" style="text-align: center">
+				<a class="btn w-25" style="background-color: #18A0FB; color: white"
+					th:href="@{/users/view-profile}" role="button"> Mi Perfil </a>
+				<a class="btn w-25 ms-5" style="background-color: #18A0FB; color: white"
+					th:href="@{sections/mySections}" role="button"> Secciones </a>
 			</div>
 		</div>
 	</section>

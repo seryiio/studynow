@@ -1,38 +1,55 @@
 package com.pe.studynow.init;
 
-import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.pe.studynow.model.entity.Segment;
-import com.pe.studynow.model.entity.User;
-import com.pe.studynow.model.repository.UserRepository;
+//import com.pe.studynow.model.entity.Segment;
+//import com.pe.studynow.model.entity.User;
+//import com.pe.studynow.model.repository.UserRepository;
 
 @Service
 public class InitUser implements CommandLineRunner {
 	
-	@Autowired
-	private UserRepository userRepository;
+	//@Autowired
+	//private UserRepository userRepository;
 	
 	@Override
 	public void run(String... args) throws Exception {
-		BCryptPasswordEncoder bcpe = new BCryptPasswordEncoder();
+		//BCryptPasswordEncoder bcpe = new BCryptPasswordEncoder();
 		// ROLE_XXXXX	-> Segmento Objetivo
 		// ACCESS_YYYYY
 		
 		// SIEMPRE DEBE DE ESTAR COMENTADO
 		// SOLO SE DEBE DESBLOQUEAR CUANDO SE CREAN USUARIO
-		/*User carlos = new User();
-		carlos.setUsername("carlos");
-		carlos.setPassword(bcpe.encode("carlos"));	
-		carlos.setSegment(Segment.STUDENT);
-		carlos.setIdSegment(1);
-		carlos.addAuthority("ROLE_STUDENT");
-		carlos.addAuthority("ACCESS_VIEW_MATRI");
-		carlos.addAuthority("ACCESS_EDIT_MATRI");
-		userRepository.save(carlos);
+		/*
 		
+		User xiomara = new User();
+		xiomara.setUsername("xiomara");
+		xiomara.setPassword(bcpe.encode("xiomara"));	
+		xiomara.setSegment(Segment.ADMINISTRATOR);
+		xiomara.setIdSegment("ADXIOPLT");
+		xiomara.addAuthority("ROLE_ADMINISTRATOR");
+		xiomara.addAuthority("ACCESS_ALL");
+		userRepository.save(xiomara);
+		User fabrizio = new User();
+		fabrizio.setUsername("fabrizio");
+		fabrizio.setPassword(bcpe.encode("fabrizio"));	
+		fabrizio.setSegment(Segment.ADMINISTRATOR);
+		fabrizio.setIdSegment("ADFABAZ");
+		fabrizio.addAuthority("ROLE_ADMINISTRATOR");
+		fabrizio.addAuthority("ACCESS_ALL");
+		userRepository.save(fabrizio);
+		
+		User eduardo = new User();
+		eduardo.setUsername("eduardo");
+		eduardo.setPassword(bcpe.encode("eduardo"));	
+		eduardo.setSegment(Segment.ADMINISTRATOR);
+		eduardo.setIdSegment("ADEDUTR");
+		eduardo.addAuthority("ROLE_ADMINISTRATOR");
+		eduardo.addAuthority("ACCESS_ALL");
+		userRepository.save(eduardo);
 		User maria = new User("maria", bcpe.encode("maria"), Segment.STUDENT, 2);
 		maria.addAuthority("ROLE_STUDENT");
 		maria.addAuthority("ACCESS_VIEW_MATRI");

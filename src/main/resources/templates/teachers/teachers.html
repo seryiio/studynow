@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: frag-head">
+<meta charset="utf-8">
+<title>Lista de Secciones</title>
+</head>
+<header th:replace="layout/layout :: frag-header"></header>
+<section class="px-3">
+	<div class="card-body" style="text-align: left;">
+
+		<div class="col-md-1 align-self-start mt-5"
+			style="text-align: center;">
+			<a class="btn" th:href="@{/teachers/new}" role="button"
+				style="background-color: #18A0FB; color: white">Agregar</a>
+		</div>
+
+	</div>
+</section>
+<hr>
+<section class="px-5">
+	<div class="d-flex justify-content-end">
+		<a href="" class="btn btn-lg disabled" tabindex="-1" role="button"
+			id="button1" aria-disabled="true"
+			style="background-color: #18A0FB; color: white">Borrar Todo</a>
+	</div>
+	<table class="table align-middle mb-0 mt-3 bg-white text-center">
+		<thead class="bg-light">
+			<tr class="table">
+				<th scope="col"></th>
+				<th scope="col">Codigo</th>
+				<th scope="col">Nombre</th>
+				<th scope="col">Apellido</th>
+				<th scope="col">DNI</th>
+				<th scope="col">Celular</th>
+				<th scope="col">Correo</th>
+				<th scope="col">Carrera</th>
+				<th scope="col">Acciones</th>
+			</tr>
+		<tbody>
+			<tr th:each="teacher : ${teachers}">
+				<td class="text-center"><input class="form-check-input"
+					type="checkbox" onclick="javacript:EnableDisableButton(this);"
+					th:field="*{teachers}" th:value="${teacher.id}"></td>
+				<td th:text="${teacher.id}"></td>
+				<td th:text="${teacher.firstName}"></td>
+				<td th:text="${teacher.lastName}"></td>
+				<td th:text="${teacher.dni}"></td>
+				<td th:text="${teacher.phoneNumber}"></td>
+				<td th:text="${teacher.emailUniversity}"></td>
+				<td th:text="${teacher.career.name}"></td>
+				<td><a class="btn" type="submit"
+					th:href="@{'/teachers/' + ${teacher.id} + '/edit'}"
+					style="background-color: transparent; color: #18A0FB"><i
+						class="fa-regular fa-pen-to-square"></i></a> <a class="btn"
+					type="submit" th:href="@{'/teachers/' + ${teacher.id} + '/delete'}"
+					style="background-color: transparent; color: #18A0FB"
+					onclick="return confirm('¿Estás seguro de eliminar el curso?')"><i
+						class="fa-solid fa-trash-can"></i></a></td>
+			</tr>
+		</tbody>
+	</table>
+	<div class="row d-flex justify-content-center">
+		<div class="col-md-4" style="text-align: center;"></div>
+		<div class="col-md-4" style="text-align: center;"></div>
+	</div>
+
+	<!-- Modal  EN EL BOTON EDIT= data-bs-toggle="modal"  data-bs-target="#staticBackdrop"-->
+	<!-- <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
+			data-bs-keyboard="false" tabindex="-1"
+			aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-scrollable">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="staticBackdropLabel">Editar Curso</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"
+							aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<form th:action="@{'/courses/' + ${course.id} + '/update'}" th:object="${course}" method="post" novalidate>
+							<div class="mb-3">
+								<label for="name" class="form-label">Nombre del Curso</label> <input
+									type="text" class="form-control" th:field="*{name}" required>
+							</div>
+
+							<div class="mb-3">
+								<label for="numberCredits" class="form-label">Cantidad de Creditos</label> <input
+									type="text" class="form-control" th:field="*{numberCredits}" required>
+							</div>
+
+							<div class="mb-3 form-check" style="text-align: center;">
+								<button class="btn btn-warning" type="submit">
+									<i class="fas fa-save"></i> Editar
+								</button>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-bs-dismiss="modal">Cancelar</button>
+						<button type="button" class="btn"
+							style="background-color: #18A0FB; color: white">Editar</button>
+					</div>
+				</div>
+			</div>
+		</div> -->
+</section>
+<footer th:replace="layout/layout :: frag-footer"></footer>
+</body>
+</html>

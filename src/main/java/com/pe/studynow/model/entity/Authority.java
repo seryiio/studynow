@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+//Entidad que define los roles de los usuarios
 @Entity
 @Table(name = "authorities", 
 	uniqueConstraints = { @UniqueConstraint(columnNames = { "user_id", "authority" }) })

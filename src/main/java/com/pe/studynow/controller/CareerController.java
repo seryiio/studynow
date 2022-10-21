@@ -14,17 +14,22 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.pe.studynow.business.crud.CareerService;
 import com.pe.studynow.model.entity.Career;
+import com.pe.studynow.model.repository.CareerRepository;
 
 @Controller
 @RequestMapping("/careers")
 @SessionAttributes("{career}")
 public class CareerController {
+	@Autowired
+	private CareerRepository careerRepository;
 	@Autowired
 	private CareerService careerService;
 	
@@ -65,6 +70,12 @@ public class CareerController {
 		return "redirect:/careers";
 	}
 
+	@GetMapping("/findOne")
+	@ResponseBody
+	public Optional<Career> findOne(Integer id) {
+		return careerRepository.findById(id);
+	}
+	
 	@GetMapping("{id}/edit")
 	public String editCareer(Model model, @PathVariable("id") Integer id) {
 		try {
@@ -84,10 +95,13 @@ public class CareerController {
 		return "careers/edit-career";
 	}
 
+
 	@PostMapping("{id}/update")
-	public String updateCareer(Model model, @ModelAttribute("career") Career career, @PathVariable("id") Integer id) {
+	public String updateCareer(Model model, @ModelAttribute("career") Career career,
+			@PathVariable("id") Integer id, @RequestParam("newName") String name) {
 		try {
 			if (careerService.existById(id)) {
+				career.setName(name);
 				careerService.update(career);
 			} else {
 				return "redirect:/careers";
@@ -98,7 +112,7 @@ public class CareerController {
 		}
 		return "redirect:/careers";
 	}
-
+	
 	@GetMapping("{id}/delete")
 	public String deleteCareer(Model model, @PathVariable("id") Integer id) {
 		try {

@@ -26,23 +26,28 @@ public class Course {
 	@Size(min = 1,max = 75, message = "El valor debe estar entre 1 y 75 digitos")
 	@Column(name = "name", length = 75, nullable = false)
 	private String name;
+
+	@Min(value = 1, message = "El valor debe ser mayor a 1 y menor o igual a 10")
+	@Max(value = 10, message = "El valor debe ser mayor a 1 y menor o igual a 10")
+	@Column(name = "cycle")
+	private Integer cycle;
 	
 	@Min(value = 1, message = "El valor debe ser mayor a 1 y menor a 8")
 	@Max(value = 8, message = "El valor debe ser mayor a 1 y menor a 8")
 	@Column(name = "number_credits")
 	private int numberCredits;
-	
+
 	@OneToMany(mappedBy = "course")
-	private List<Section> section;
+	private List<Section> sections;
 
 	@ManyToOne
 	@JoinColumn(name = "career_id")
 	private Career career;
 	
 	public Course() {
-		section = new ArrayList<>();
+		sections = new ArrayList<>();
 	}
-
+	
 	public Integer getId() {
 		return id;
 	}
@@ -59,6 +64,14 @@ public class Course {
 		this.name = name;
 	}
 
+	public Integer getCycle() {
+		return cycle;
+	}
+
+	public void setCycle(Integer cycle) {
+		this.cycle = cycle;
+	}
+
 	public int getNumberCredits() {
 		return numberCredits;
 	}
@@ -67,12 +80,12 @@ public class Course {
 		this.numberCredits = numberCredits;
 	}
 
-	public List<Section> getSection() {
-		return section;
+	public List<Section> getSections() {
+		return sections;
 	}
 
-	public void setSection(List<Section> section) {
-		this.section = section;
+	public void setSections(List<Section> sections) {
+		this.sections = sections;
 	}
 
 	public Career getCareer() {
@@ -82,6 +95,5 @@ public class Course {
 	public void setCareer(Career career) {
 		this.career = career;
 	}
-
 	
 }

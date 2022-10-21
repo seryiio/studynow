@@ -21,7 +21,6 @@ import com.pe.studynow.security.MyUserDetails;
 @Service
 public class UserAuthentication {
 	
-	// Cambiar los service de acuerdo al segmento que tengan
 	@Autowired
 	private StudentService studentService;
 	
@@ -34,7 +33,7 @@ public class UserAuthentication {
 	public boolean isAuthenticated() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		
-		if(authentication instanceof AnonymousAuthenticationToken) { // Si no hay nadie autenticado
+		if(authentication instanceof AnonymousAuthenticationToken) {
 			return false;			
 		} else {
 			return true;
@@ -44,19 +43,17 @@ public class UserAuthentication {
 	public void getSegment(Model model) {
 		try {
 			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-			if(!(authentication instanceof AnonymousAuthenticationToken)) {	// Si Hay alguien autenticado
+			if(!(authentication instanceof AnonymousAuthenticationToken)) {	
 				
 				MyUserDetails myUserDetails = (MyUserDetails)authentication.getPrincipal();
 				model.addAttribute("segment", myUserDetails.getSegment());
 				
-				// Para el segmento 1: Cambiar STUDENT por su segmento
 				if (myUserDetails.getSegment().equals(Segment.STUDENT)) {
 					if (studentService.existById(myUserDetails.getIdSegment())) {
 						Optional<Student> optional = studentService.findById(myUserDetails.getIdSegment());
 						model.addAttribute("student", optional.get());
 					}					
 				} 
-				// Para el segmento 2: Cambiar TEACHER por su segmento
 				else if (myUserDetails.getSegment().equals(Segment.TEACHER)) {
 					if (teacherService.existById(myUserDetails.getIdSegment())) {
 						Optional<Teacher> optional = teacherService.findById(myUserDetails.getIdSegment());
@@ -76,7 +73,7 @@ public class UserAuthentication {
 			e.printStackTrace();
 		}
 	}
-	public Integer getIdSegment() {
+	public String getIdSegment() {
 		
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if(!(authentication instanceof AnonymousAuthenticationToken)) {	// Si Hay alguien autenticado

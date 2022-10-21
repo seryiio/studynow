@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -29,7 +30,7 @@ import com.pe.studynow.model.entity.Course;
 public class CourseController {
 	@Autowired
 	private CourseService courseService;
-	
+
 	@Autowired
 	private CareerService careerService;
 
@@ -61,8 +62,8 @@ public class CourseController {
 	}
 
 	@PostMapping("save")
-	public String saveCourse(@Valid Course course, BindingResult result, Model model, SessionStatus status, RedirectAttributes redirectAttrs)
-			throws Exception {
+	public String saveCourse(@Valid Course course, BindingResult result, Model model, SessionStatus status,
+			RedirectAttributes redirectAttrs) throws Exception {
 		List<Course> courses = courseService.getAll();
 		model.addAttribute("courses", courses);
 		if (result.hasErrors()) {
@@ -104,9 +105,15 @@ public class CourseController {
 	}
 
 	@PostMapping("{id}/update")
-	public String updateCourse(Model model, @ModelAttribute("course") Course course, @PathVariable("id") Integer id) {
+	public String updateCourse(Model model, @ModelAttribute("course") Course course, @PathVariable("id") Integer id,
+			@RequestParam("newName") String name, @RequestParam("newCycle") Integer cycle,
+			@RequestParam("newCreditAmount") Integer creditAmount, @RequestParam("newCareer") Career careerName) {
 		try {
-			if (courseService.existById(id)) {
+			if (careerService.existById(id)) {
+				course.setName(name);
+				course.setCycle(cycle);
+				course.setNumberCredits(creditAmount);
+				course.setCareer(careerName);
 				courseService.update(course);
 			} else {
 				return "redirect:/courses";
@@ -132,7 +139,7 @@ public class CourseController {
 		}
 		return "redirect:/courses";
 	}
-	
+
 	@GetMapping("{id}/deleteCourses")
 	public String deleteCourses(Model model, @PathVariable("id") Integer id) {
 		try {

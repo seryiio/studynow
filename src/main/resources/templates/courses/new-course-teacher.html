@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="layout/layout :: frag-head">
+<meta charset="ISO-8859-1">
+<title>New Course for Teacher</title>
+</head>
+<body>
+
+	<header th:insert="layout/layout :: frag-header"></header>
+	<main>
+
+		<section class="section">
+			<div>
+				<div class="card-body" style="text-align: left;">
+
+					<div class="row g-3 needs-validation">
+						<div class="card text-center">
+							<div class="card-header">Lista de Cursos de la Carrera</div>
+							<form th:action="@{/myCourses/save-new-course}" th:object="${teacherxcourse}" method="post"
+								class="card-body">
+								<table class="table align-middle mb-0 mt-3 bg-white text-center">
+									<thead class="bg-light">
+										<tr class="table">
+											<th scope="col"></th>
+											<th scope="col">Nombre</th>
+											<th scope="col">Creditos</th>
+											<th scope="col">Carrera</th>
+										</tr>
+									<tbody>
+										<tr th:each="course : ${courses}"
+											th:if="${course.career.name == teacher.career.name}">
+											<td><input type="radio" name="accessTypes" th:field="*{course}" th:value="${course.id}" /></td>
+											<td th:text="${course.name}"></td>
+											<td th:text="${course.numberCredits}"></td>
+											<td th:text="${course.career.name}"></td>
+										</tr>
+									</tbody>
+								</table>
+								<div class="justify-content-center align-self-center mt-5"
+									style="text-align: center;">
+									<button class="btn" type="submit"
+										style="background-color: #18A0FB; color: white">Inscribirse</button>
+								</div>
+							</form>
+						</div>
+
+					</div>
+				</div>
+
+
+
+			</div>
+
+		</section>
+
+	</main>
+	<footer th:replace="layout/layout :: frag-footer"></footer>
+
+</body>
+</html>

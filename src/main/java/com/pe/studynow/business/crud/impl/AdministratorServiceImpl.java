@@ -15,7 +15,7 @@ public class AdministratorServiceImpl implements AdministratorService{
 	private AdministratorRepository administratorRepository;
 	
 	@Override
-	public JpaRepository<Administrator, Integer> getJpaRepository() {
+	public JpaRepository<Administrator, String> getJpaRepository() {
 		return this.administratorRepository;
 	}
 }

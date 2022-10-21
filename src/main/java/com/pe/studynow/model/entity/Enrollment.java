@@ -18,15 +18,12 @@ public class Enrollment {
 	@Column(name = "enrollment_id")
 	private Integer id;
 	
-	@Column(name = "type", length = 35)
-	private String type;
-	
 	@Column(name = "number_cycle", nullable = false)
 	private String numberCycle;
 	
 	@ManyToOne
-	@JoinColumn(name = "course_id")
-	private Course course;
+	@JoinColumn(name = "section_id")
+	private Section section;
 	
 	@ManyToOne
 	@JoinColumn(name = "student_id")
@@ -40,14 +37,6 @@ public class Enrollment {
 		this.id = id;
 	}
 
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
 	public String getNumberCycle() {
 		return numberCycle;
 	}
@@ -56,12 +45,14 @@ public class Enrollment {
 		this.numberCycle = numberCycle;
 	}
 
-	public Course getCourse() {
-		return course;
+	
+
+	public Section getSection() {
+		return section;
 	}
 
-	public void setCourse(Course course) {
-		this.course = course;
+	public void setSection(Section section) {
+		this.section = section;
 	}
 
 	public Student getStudent() {

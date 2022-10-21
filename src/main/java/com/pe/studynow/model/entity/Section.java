@@ -1,5 +1,6 @@
 package com.pe.studynow.model.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -37,16 +38,32 @@ public class Section {
 	@NotEmpty(message = "Debe ingresar un la hora de fin")
 	@Column(name = "end_time")
 	private String endTime;
-	
-	@OneToMany(mappedBy = "section")
-	private List<Teacher> teacher;
 
+	@OneToMany(mappedBy = "section")
+	private List<Enrollment> enrollment;
+	
 	@ManyToOne
 	@JoinColumn(name = "course_id")
 	private Course course;
 
+	@ManyToOne
+	@JoinColumn(name = "teacher_id")
+	private Teacher teacher;
+	
+	public Section() {
+		enrollment = new ArrayList<>();
+	}
+
 	public Integer getId() {
 		return id;
+	}
+
+	public Teacher getTeacher() {
+		return teacher;
+	}
+
+	public void setTeacher(Teacher teacher) {
+		this.teacher = teacher;
 	}
 
 	public void setId(Integer id) {
@@ -85,14 +102,6 @@ public class Section {
 		this.endTime = endTime;
 	}
 
-	public List<Teacher> getTeacher() {
-		return teacher;
-	}
-
-	public void setTeacher(List<Teacher> teacher) {
-		this.teacher = teacher;
-	}
-
 	public Course getCourse() {
 		return course;
 	}
@@ -100,4 +109,14 @@ public class Section {
 	public void setCourse(Course course) {
 		this.course = course;
 	}
+
+	public List<Enrollment> getEnrollment() {
+		return enrollment;
+	}
+
+	public void setEnrollment(List<Enrollment> enrollment) {
+		this.enrollment = enrollment;
+	}
+	
+	
 }

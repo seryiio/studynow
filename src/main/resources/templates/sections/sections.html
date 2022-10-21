@@ -24,10 +24,10 @@
 				</div>
 				<div class="modal-body">
 					<form th:action="@{/sections/save}" th:object="${section}"
-						method="post" novalidate>
+						method="post" novalidate><p class="fst-italic" style="color:gray">Para agregar una sección registre un curso y un profesor.</p>
 						<div class="mb-3">
 							<label for="name" class="form-label">Nombre de la Seccion</label>
-							<input type="text" class="form-control" th:field="*{name}"
+							<input type="text" class="form-control" th:field="*{name}" placeholder="Ejemplo: SS71"
 								required>
 						</div>
 
@@ -56,6 +56,16 @@
 									th:text="${course.name}"></option>
 							</select>
 						</div>
+						
+						<div class="mb-3">
+							<label for="teacher" class="form-label">Profesor</label> <select
+								class="form-select" th:field="*{teacher}" required>
+								<option value="">Elige un profesor</option>
+								<option th:each="teacher : ${teachers}" th:value="${teacher.id}"
+									th:text="${teacher.firstName + ' ' + teacher.lastName + ' -  Profesor de:' + ' ' + teacher.career.name}"></option>
+							</select>
+						</div>
+						
 						<div class="mt-5"
 							style="text-align: right;">
 							<button type="button" class="btn btn-secondary"
@@ -81,9 +91,9 @@
 		<thead class="bg-light">
 			<tr class="table">
 				<th scope="col"></th>
-				<th scope="col">ID</th>
-				<th scope="col">Nombre de la Seccion</th>
+				<th scope="col">Seccion</th>
 				<th scope="col">Curso</th>
+				<th scope="col">Profesor</th>
 				<th scope="col">Vacantes</th>
 				<th scope="col">Hora Comienzo</th>
 				<th scope="col">Hora Fin</th>
@@ -94,9 +104,9 @@
 				<td class="text-center"><input class="form-check-input"
 					type="checkbox" onclick="javacript:EnableDisableButton(this);"
 					th:field="*{sections}" th:value="${section.id}"></td>
-				<td th:text="${section.id}"></td>
 				<td th:text="${section.name}"></td>
 				<td th:text="${section.course.name}"></td>
+				<td th:text="${section.teacher.firstName + ' ' + section.teacher.lastName}"></td>
 				<td th:text="${section.vacancies}"></td>
 				<td th:text="${section.startTime}"></td>
 				<td th:text="${section.endTime}"></td>

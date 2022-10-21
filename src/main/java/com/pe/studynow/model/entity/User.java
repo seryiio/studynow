@@ -14,9 +14,12 @@ import javax.persistence.Index;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+
+//Creacion de usuario para estudiantes, profesores, administradores
 @Entity
 @Table(name = "users", 
 		indexes = { @Index(columnList = "username", name = "user_index_username")})
@@ -25,15 +28,13 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@NotNull
-	@NotBlank
-	@Size(max = 30)
-	@Column(name = "username", length = 30, nullable = false)
+	@NotEmpty(message = "Debe ingresar un ID")
+	@Size(min = 1,max = 20 , message = "El valor debe estar entre 1 y 20 caracteres")
+	@Column(name = "username", length = 20, nullable = false)
 	private String username;
 	
-	@NotNull
-	@NotBlank
-	@Size(max = 60)
+	@NotEmpty(message = "Debe ingresar una contraseña")
+	@Size(min = 1,max = 60 , message = "El valor debe estar entre 1 y 60 caracteres")
 	@Column(name = "password", length = 60, nullable = false)
 	private String password;
 	
@@ -45,7 +46,7 @@ public class User {
 	private Segment segment;
 	
 	@Column(name = "id_segment", nullable = false)
-	private Integer idSegment;
+	private String idSegment;
 	
 	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<Authority> authorities;
@@ -54,8 +55,8 @@ public class User {
 		this.enable = true;
 		this.authorities = new ArrayList<>();
 	}
-	public User(@NotNull @NotBlank @Size(max = 30) String username, @NotNull @NotBlank @Size(max = 60) String password,
-			Segment segment, Integer idSegment) {
+	public User(@NotNull @NotBlank @Size(max = 20) String username, @NotNull @NotBlank @Size(max = 60) String password,
+			Segment segment, String idSegment) {
 		this.username = username;
 		this.password = password;
 		this.segment = segment;
@@ -107,10 +108,10 @@ public class User {
 	public void setSegment(Segment segment) {
 		this.segment = segment;
 	}
-	public Integer getIdSegment() {
+	public String getIdSegment() {
 		return idSegment;
 	}
-	public void setIdSegment(Integer idSegment) {
+	public void setIdSegment(String idSegment) {
 		this.idSegment = idSegment;
 	}
 	
