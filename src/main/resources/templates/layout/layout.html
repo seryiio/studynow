@@ -69,13 +69,13 @@
 							</ul></li>
 					</ul>
 
-					<div class="dropdown" sec:authorize="isAuthenticated()">
+					<div class="dropdown me-5" sec:authorize="isAuthenticated()">
 						<a class="btn btn-outline dropdown-toggle perfil" href="#"
-							role="button" id="dropdownMenuLink" data-bs-toggle="dropdown"
+							role="button" id="dropdownMenuLink1" data-bs-toggle="dropdown"
 							aria-expanded="false" style="color: white; border-color: white;">
 							<span sec:authentication="name"></span>
 						</a>
-						<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+						<ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuLink1">
 							<li><a class="dropdown-item"
 								th:href="@{/users/view-profile}">Ver Perfil</a></li>
 							<li><hr class="dropdown-divider"></li>
