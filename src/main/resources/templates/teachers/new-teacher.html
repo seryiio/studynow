@@ -106,12 +106,15 @@
 
 								<div class="mb-3">
 									<label for="teacher.career" class="form-label">Carrera</label>
-									<select class="form-select" th:field="*{teacher.career}"
+									<select class="form-select" th:field="*{teacher.career}" th:errorclass="'form-control alert-danger'"
 										required>
 										<option value="">Elige una Carrera</option>
 										<option th:each="career : ${careers}" th:value="${career.id}"
 											th:text="${career.name}"></option>
 									</select>
+									<small class="form-text text-danger" 
+										th:if="${#fields.hasErrors('teacher.career')}"
+										th:errors="*{teacher.career}"></small>
 								</div>
 								<div class="mt-5 text-center" style="text-align: right;">
 									<button type="submit" class="btn"

@@ -14,6 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -43,10 +44,12 @@ public class Section {
 	private List<Enrollment> enrollment;
 	
 	@ManyToOne
+	@NotNull(message = "Debe ingresar un Curso")
 	@JoinColumn(name = "course_id")
 	private Course course;
 
 	@ManyToOne
+	@NotNull(message = "Debe ingresar un Profesor")
 	@JoinColumn(name = "teacher_id")
 	private Teacher teacher;
 	

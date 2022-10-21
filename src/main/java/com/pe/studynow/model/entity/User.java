@@ -44,7 +44,8 @@ public class User {
 	
 	@Column(name = "segment", nullable = false)
 	private Segment segment;
-	
+
+	@NotNull(message = "Debe ingresar el Codigo del Usuario")
 	@Column(name = "id_segment", nullable = false)
 	private String idSegment;
 	

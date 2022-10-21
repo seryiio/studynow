@@ -14,6 +14,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -67,6 +68,7 @@ public class Student {
 	private List<Enrollment> enrollments;
 
 	@ManyToOne
+	@NotNull(message = "Debe ingresar una Carrera")
 	@JoinColumn(name = "career_id")
 	private Career career;
 	

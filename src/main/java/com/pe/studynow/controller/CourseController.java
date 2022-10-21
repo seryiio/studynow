@@ -66,6 +66,8 @@ public class CourseController {
 			RedirectAttributes redirectAttrs) throws Exception {
 		List<Course> courses = courseService.getAll();
 		model.addAttribute("courses", courses);
+		List<Career> careers = careerService.getAll();
+		model.addAttribute("careers", careers);
 		if (result.hasErrors()) {
 			return "courses/courses";
 		} else {

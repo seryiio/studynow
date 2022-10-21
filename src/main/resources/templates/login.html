@@ -25,9 +25,17 @@
 				<input type="password" class="form-control" name="password"
 					id="password" placeholder="Contraseña" required />
 			</div>
+			<div class="w-100 col-sm-3 mb-3">
+				<input type="submit" class="w-100 btn btn-lg"
+					style="background-color: #18A0FB; color: white" value="Ingresar" />
+			</div>
 			<div class="w-100 col-sm-3">
-				<input type="submit" class="w-100 btn btn-lg" style="background-color: #18A0FB; color: white"
-					value="Ingresar" />
+				<div class="alert alert-success" th:if="${success != null}"
+					th:text="${success}"></div>
+				<div class="alert alert-danger" th:if="${error != null}"
+					th:text="${error}"></div>
+				<div class="alert alert-info" th:if="${info != null}"
+					th:text="${info}"></div>
 			</div>
 		</form>
 	</main>
