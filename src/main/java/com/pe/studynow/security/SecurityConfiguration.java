@@ -40,44 +40,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		try {
-			http.authorizeRequests()
-			// Aqui realiza la configuración de los permisos
-
-					.antMatchers("/*.js", "/*.css").permitAll()
-			
-					.antMatchers("/students").hasRole("ADMINISTRATOR")
-					.antMatchers("/teachers").hasRole("ADMINISTRATOR")
-					.antMatchers("/careers").hasRole("ADMINISTRATOR")
-					.antMatchers("/sections").hasRole("ADMINISTRATOR")
-					.antMatchers("/courses").hasRole("ADMINISTRATOR")
-					.antMatchers("/users").hasRole("ADMINISTRATOR")
-
-					.antMatchers("/students/new").hasRole("ADMINISTRATOR")
-					.antMatchers("/teachers/new").hasRole("ADMINISTRATOR")
-					.antMatchers("/careers/new").hasRole("ADMINISTRATOR")
-					.antMatchers("/sections/new").hasRole("ADMINISTRATOR")
-					.antMatchers("/courses/new").hasRole("ADMINISTRATOR")
-					.antMatchers("/users/new").hasRole("ADMINISTRATOR")
-
-					.antMatchers("/users/view-profile").hasAnyRole("ADMINISTRATOR","TEACHER","STUDENT")
-					
-					.antMatchers("/students/**/edit").hasRole("ADMINISTRATOR")
-					.antMatchers("/teachers/**/edit").hasRole("ADMINISTRATOR")
-					.antMatchers("/careers/**/edit").hasRole("ADMINISTRATOR")
-					.antMatchers("/sections/**/edit").hasRole("ADMINISTRATOR")
-					.antMatchers("/courses/**/edit").hasRole("ADMINISTRATOR")
-					.antMatchers("/users/**/edit").hasRole("ADMINISTRATOR")
-					
-					.antMatchers("/students/**/edit").hasAnyAuthority("ACCESS_EDIT_MATRI", "ACCESS_ALL")
-					.antMatchers("/courses/list").hasRole("TEACHER")
-					.antMatchers("/enrollments/**").hasRole("STUDENT")
-
-					.antMatchers("/enrollments").hasRole("STUDENT")
-
-					.antMatchers("/main").hasAnyRole("ADMINISTRATOR","TEACHER","STUDENT")
-					.and()
-						.formLogin().loginPage("/login").permitAll().and().logout().permitAll().and()
-						.exceptionHandling().accessDeniedPage("/error");
 		} catch (Exception e) {
 			// TODO: handle exception
 			System.out.print(e.getMessage());
