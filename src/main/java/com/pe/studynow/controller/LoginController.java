@@ -21,7 +21,7 @@ public class LoginController {
 			RedirectAttributes flash) {
 
 		if (principal != null) {
-			return "redirect:/main";
+			return "main";
 		}
 
 		if (error != null) {
