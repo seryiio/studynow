@@ -71,9 +71,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 					.and().formLogin().successHandler(sucessHandler).loginPage("/login").loginProcessingUrl("/login")
 					// Si el login es exitoso, retorna a /home
-					.defaultSuccessUrl("/home").permitAll().and().logout().logoutSuccessUrl("/login").permitAll()
-					// Si el usuario va a una ruta sin acceso, devuelve a /error_403 (Configurado en MvcConfig)
-					.and().exceptionHandling().accessDeniedPage("/error403");
+					.defaultSuccessUrl("/main").permitAll().and().logout().logoutSuccessUrl("/login").permitAll()
+					// Si el usuario va a una ruta sin acceso, devuelve a /error(Configurado en MvcConfig)
+					.and().exceptionHandling().accessDeniedPage("/error");
 		} catch (Exception e) {
 			// TODO: handle exception
 			System.out.print(e.getMessage());
