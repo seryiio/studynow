@@ -15,7 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequestMapping
 public class LoginController {
 
-	@GetMapping(value = { "/login"})
+	@GetMapping("/login")
 	public String login(@RequestParam(value = "error", required = false) String error,
 			@RequestParam(value = "logout", required = false) String logout, Model model, Principal principal,
 			RedirectAttributes flash) {
