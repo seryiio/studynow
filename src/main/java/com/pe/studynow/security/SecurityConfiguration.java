@@ -46,7 +46,41 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 			http.authorizeRequests()
 					// Aqui realiza la configuración de los permisos
 
-					.antMatchers("/*.js", "/*.css").permitAll();
+					.antMatchers("/*.js", "/*.css").permitAll()
+
+					.antMatchers("/students").access("hasRole('ADMINISTRATOR')")
+					.antMatchers("/teachers").access("hasRole('ADMINISTRATOR')")
+					.antMatchers("/careers").access("hasRole('ADMINISTRATOR')")
+					.antMatchers("/sections").access("hasRole('ADMINISTRATOR')")
+					.antMatchers("/courses").access("hasRole('ADMINISTRATOR')")
+					.antMatchers("/users").access("hasRole('ADMINISTRATOR')")
+
+					.antMatchers("/students/new").access("hasRole('ADMINISTRATOR')")
+					.antMatchers("/teachers/new").access("hasRole('ADMINISTRATOR')")
+					.antMatchers("/careers/new").access("hasRole('ADMINISTRATOR')")
+					.antMatchers("/sections/new").access("hasRole('ADMINISTRATOR')")
+					.antMatchers("/courses/new").access("hasRole('ADMINISTRATOR')")
+					.antMatchers("/users/new").access("hasRole('ADMINISTRATOR')")
+
+					.antMatchers("/users/view-profile").access("hasRole('ADMINISTRATOR') or hasRole('STUDENT') or hasRole('TEACHER')")
+
+					.antMatchers("/students/**/edit").access("hasRole('ADMINISTRATOR')")
+					.antMatchers("/teachers/**/edit").access("hasRole('ADMINISTRATOR')")
+					.antMatchers("/careers/**/edit").access("hasRole('ADMINISTRATOR')")
+					.antMatchers("/sections/**/edit").access("hasRole('ADMINISTRATOR')")
+					.antMatchers("/courses/**/edit").access("hasRole('ADMINISTRATOR')")
+					.antMatchers("/users/**/edit").access("hasRole('ADMINISTRATOR')")
+
+					.antMatchers("/students/**/edit").access("hasRole('ADMINISTRATOR') or hasRole('STUDENT')")
+					.antMatchers("/courses/list").access("hasRole('ADMINISTRATOR')")
+
+					.antMatchers("/enrollments").access("hasRole('STUDENT')")
+
+					.and().formLogin().successHandler(sucessHandler).loginPage("/login").loginProcessingUrl("/login")
+					// Si el login es exitoso, retorna a /home
+					.defaultSuccessUrl("/main").permitAll().and().logout().logoutSuccessUrl("/login").permitAll()
+					// Si el usuario va a una ruta sin acceso, devuelve a /error(Configurado en MvcConfig)
+					.and().exceptionHandling().accessDeniedPage("/error");
 		} catch (Exception e) {
 			// TODO: handle exception
 			System.out.print(e.getMessage());
