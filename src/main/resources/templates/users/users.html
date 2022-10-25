@@ -2,13 +2,13 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8">
-
 <head th:replace="layout/layout :: frag-head">
 
 
 
 <title>Lista de Usuarios</title>
-</head><body>
+</head>
+<body>
 	<header th:replace="layout/layout :: frag-header"></header>
 
 	<section class="px-5 pt-3">
@@ -25,45 +25,65 @@
 				<tr align="center" th:each="user: ${users}">
 					<td th:text="${user.username}"></td>
 					<td th:text="${user.segment}"></td>
-					<td><a class="btn editBtn" type="submit" data-bs-toggle="modal"
-					th:attr="data-bs-target='#staticBackdrop'+*{user.id}"
-					style="background-color: transparent; color: #18A0FB"><i
-						class="fa-regular fa-pen-to-square"></i></a>
+					<td><a class="btn editBtn" type="submit"
+						data-bs-toggle="modal"
+						th:attr="data-bs-target='#staticBackdrop'+*{user.id}"
+						style="background-color: transparent; color: #18A0FB"><i
+							class="fa-regular fa-pen-to-square"></i></a>
 
-					<div class="modal fade" th:id="*{'staticBackdrop'+{user.id}}"
-						data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-						aria-labelledby="staticBackdropLabel" aria-hidden="true">
-						<div class="modal-dialog modal-dialog-scrollable">
-							<div class="modal-content">
-								<div class="modal-header">
-									<h5 class="modal-title" id="staticBackdropLabel">Editar
-										Usuario</h5>
-									<button type="button" class="btn-close" data-bs-dismiss="modal"
-										aria-label="Close"></button>
-								</div>
-								<div class="modal-body" style="text-align: left;">
-									<form th:action="@{'/users/' + ${user.id} + '/update'}"
-										method="post">
-										<div class="mb-3">
-											<label for="newSegment" class="form-label">Tipo de Usuario</label> <input type="text" class="form-control"
-												name="newSegment" th:value="*{user.segment}">
-										</div>
-
-										<div class="mt-5" style="text-align: right;">
-											<button type="button" class="btn btn-secondary"
-												data-bs-dismiss="modal">Cancelar</button>
-											<button type="submit" class="btn"
-												style="background-color: #18A0FB; color: white">Editar</button>
-										</div>
-									</form>
+						<div class="modal fade" th:id="*{'staticBackdrop'+{user.id}}"
+							data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+							aria-labelledby="staticBackdropLabel" aria-hidden="true">
+							<div class="modal-dialog modal-dialog-scrollable">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="staticBackdropLabel">Editar
+											Usuario</h5>
+										<button type="button" class="btn-close"
+											data-bs-dismiss="modal" aria-label="Close"></button>
+									</div>
+									<div class="modal-body" style="text-align: left;">
+										<form th:action="@{'/users/' + ${user.id} + '/update'}"
+											method="post">
+											<div class="mb-3">
+												<div class="mb-3" style="display: none">
+													<label for="newIDUsuario" class="form-label">ID de Usuario</label>
+													<input type="text" class="form-control" name="newIDUsuario"
+														th:value="*{user.idSegment}">
+												</div>
+												<div class="mb-3">
+													<label for="newUsername" class="form-label">Username</label>
+													<input type="text" class="form-control" name="newUsername"
+														th:value="*{user.username}">
+												</div>
+												<div class="mb-3" style="display: none">
+													<label for="newPassword" class="form-label">Password</label>
+													<input type="text" class="form-control" name="newPassword"
+														th:value="*{user.password}">
+												</div>
+												<label for="newSegment" class="form-label">Segmento</label>
+												<select class="form-select" name="newSegment" required>
+													<option selected th:value="${user.id}"
+														th:text="*{user.segment}"></option>
+													<option th:each="segment : ${segments}"
+														th:value="${segment}" th:text="${segment}"></option>
+												</select>
+											</div>
+											<div class="mt-5" style="text-align: right;">
+												<button type="button" class="btn btn-secondary"
+													data-bs-dismiss="modal">Cancelar</button>
+												<button type="submit" class="btn"
+													style="background-color: #18A0FB; color: white">Editar</button>
+											</div>
+										</form>
+									</div>
 								</div>
 							</div>
-						</div>
-					</div> <a class="btn" type="submit"
-					th:href="@{'/users/' + ${user.id} + '/delete'}"
-					style="background-color: transparent; color: #18A0FB"
-					onclick="return confirm('¿Estás seguro de eliminar el usuario?')"><i
-						class="fa-solid fa-trash-can"></i></a></td>
+						</div> <a class="btn" type="submit"
+						th:href="@{'/users/' + ${user.id} + '/delete'}"
+						style="background-color: transparent; color: #18A0FB"
+						onclick="return confirm('¿Estás seguro de eliminar el usuario?')"><i
+							class="fa-solid fa-trash-can"></i></a></td>
 				</tr>
 			</tbody>
 		</table>

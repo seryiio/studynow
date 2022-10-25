@@ -58,6 +58,7 @@ public class SectionController {
 		Section section = new Section();
 		model.addAttribute("section", section);
 		try {
+			System.out.print("ODI DE MIERDA");
 			List<Section> sections = sectionService.getAll();
 			model.addAttribute("sections", sections);
 			List<Course> courses = courseService.getAll();

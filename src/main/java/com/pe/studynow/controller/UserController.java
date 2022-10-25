@@ -90,9 +90,12 @@ public class UserController {
 	
 	@PostMapping("{id}/update")
 	public String updateUser(Model model, @ModelAttribute("user") User user,
-			@PathVariable("id") Integer id, @RequestParam("newSegment") Segment segment) {
+			@PathVariable("id") Integer id, @RequestParam("newSegment") Segment segment, @RequestParam("newPassword") String password, @RequestParam("newIDUsuario") String idUsuario, @RequestParam("newUsername") String username) {
 		try {
 			if (userService.existById(id)) {
+				user.setIdSegment(idUsuario);
+				user.setUsername(username);
+				user.setPassword(password);
 				user.setSegment(segment);
 				userService.update(user);
 			} else {

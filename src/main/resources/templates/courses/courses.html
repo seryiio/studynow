@@ -1,8 +1,8 @@
 <!doctype html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="layout/layout :: frag-head">
+<title>Cursos</title>
 <meta charset="utf-8">
-<title>Listar Curso</title>
 </head>
 <header th:replace="layout/layout :: frag-header"></header>
 <section class="px-3">
@@ -121,7 +121,7 @@
 										</div>
 
 										<div class="mb-3">
-											<label for="career" class="form-label">Carrera</label> <select
+											<label for="newCareer" class="form-label">Carrera</label> <select
 												class="form-select" name="newCareer" required>
 												<option selected th:value="${course.career.id}" th:text="*{course.career.name}"></option>
 												<option th:each="career : ${careers}"

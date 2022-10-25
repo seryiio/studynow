@@ -7,8 +7,10 @@
 <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
 <link th:href="@{/css/solid.min.css}" rel="stylesheet">
 <script type="text/javascript" src="//code.jquery.com/jquery-1.6.2.js"></script>
-<title>Listar Carreras</title>
+<title>Lista de Carreras</title>
+<script type="text/javascript">    
 
+</script>
 </head>
 <header th:replace="layout/layout :: frag-header"></header>
 <section class="px-3">
@@ -52,8 +54,8 @@
 		<tbody>
 			<tr th:each="career : ${careers}">
 				<td class="text-center"><input
-					class="form-check-input checkbox" type="checkbox"
-					th:field="*{career}" th:value="${career.id}"></td>
+					class="form-check-input checkbox" id="codigoCarrera1"
+					type="checkbox" th:value="${career.id}"></td>
 				<td th:text="${career.id}"></td>
 				<td th:text="${career.name}"></td>
 				<td><a class="btn editBtn" type="submit" data-bs-toggle="modal"
