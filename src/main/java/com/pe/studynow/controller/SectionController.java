@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -35,13 +36,12 @@ public class SectionController {
 
 	@Autowired
 	private TeacherService teacherService;
-	
+
 	@Autowired
 	private CourseService courseService;
 
 	@Autowired
 	private UserAuthentication userAuthentication;
-	
 
 	/*
 	 * @GetMapping public String listCourses(Model model) {
@@ -60,9 +60,9 @@ public class SectionController {
 		try {
 			List<Section> sections = sectionService.getAll();
 			model.addAttribute("sections", sections);
-			List<Course> courses  = courseService.getAll();
+			List<Course> courses = courseService.getAll();
 			model.addAttribute("courses", courses);
-			List<Teacher> teachers  = teacherService.getAll();
+			List<Teacher> teachers = teacherService.getAll();
 			model.addAttribute("teachers", teachers);
 
 		} catch (Exception e) {
@@ -73,8 +73,8 @@ public class SectionController {
 	}
 
 	@PostMapping("save")
-	public String saveSection(@Valid Section section, BindingResult result, Model model, SessionStatus status, RedirectAttributes redirectAttrs)
-			throws Exception {
+	public String saveSection(@Valid Section section, BindingResult result, Model model, SessionStatus status,
+			RedirectAttributes redirectAttrs) throws Exception {
 		List<Section> sections = sectionService.getAll();
 		model.addAttribute("sections", sections);
 		List<Course> courses = courseService.getAll();
@@ -122,12 +122,21 @@ public class SectionController {
 	}
 
 	@PostMapping("{id}/update")
-	public String updateSection(Model model, @ModelAttribute("section") Section section, @PathVariable("id") Integer id) {
+	public String updateSection(Model model, @ModelAttribute("section") Section section, @PathVariable("id") Integer id,
+			@RequestParam("newName") String name, @RequestParam("newVacancies") Integer vacancies,
+			@RequestParam("newStartTime") String startTime, @RequestParam("newEndTime") String endTime,
+			@RequestParam("newCourse") Course courseName, @RequestParam("newTeacher") Teacher teacherName) {
 		try {
 			if (sectionService.existById(id)) {
+				section.setName(name);
+				section.setVacancies(vacancies);
+				section.setStartTime(startTime);
+				section.setEndTime(endTime);
+				section.setCourse(courseName);
+				section.setTeacher(teacherName);
 				sectionService.update(section);
 			} else {
-				return "redirect:/section";
+				return "redirect:/sections";
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -150,7 +159,7 @@ public class SectionController {
 		}
 		return "redirect:/sections";
 	}
-	
+
 	@GetMapping("{id}/deleteSections")
 	public String deleteSections(Model model, @PathVariable("id") Integer id) {
 		try {

@@ -122,7 +122,8 @@
 
 										<div class="mb-3">
 											<label for="career" class="form-label">Carrera</label> <select
-												class="form-select" th:value="*{course.career.name}" name="newCareer" required>
+												class="form-select" name="newCareer" required>
+												<option selected th:value="${course.career.id}" th:text="*{course.career.name}"></option>
 												<option th:each="career : ${careers}"
 													th:value="${career.id}" th:text="${career.name}"></option>
 											</select>
@@ -132,7 +133,7 @@
 											<button type="button" class="btn btn-secondary"
 												data-bs-dismiss="modal">Cancelar</button>
 											<button type="submit" class="btn"
-												style="background-color: #18A0FB; color: white">Agregar</button>
+												style="background-color: #18A0FB; color: white">Editar</button>
 										</div>
 									</form>
 								</div>

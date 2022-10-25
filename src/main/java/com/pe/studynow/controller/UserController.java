@@ -11,8 +11,10 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -84,6 +86,23 @@ public class UserController {
 		}
 		return "redirect:/teachers";
 
+	}
+	
+	@PostMapping("{id}/update")
+	public String updateUser(Model model, @ModelAttribute("user") User user,
+			@PathVariable("id") Integer id, @RequestParam("newSegment") Segment segment) {
+		try {
+			if (userService.existById(id)) {
+				user.setSegment(segment);
+				userService.update(user);
+			} else {
+				return "redirect:/users";
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "redirect:/users";
 	}
 	
 	@GetMapping("view-profile")

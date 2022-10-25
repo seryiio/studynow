@@ -22,17 +22,48 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr align="center" th:each="u: ${users}">
-					<td th:text="${u.username}"></td>
-					<td th:text="${u.segment}"></td>
-					<td><a class="btn" type="submit"
-						th:href="@{'/users/' + ${u.id} + '/edit'}"
-						style="background-color: transparent; color: #18A0FB"><i
-							class="fa-regular fa-pen-to-square"></i></a> <a class="btn"
-						type="submit" th:href="@{'/users/' + ${u.id} + '/delete'}"
-						style="background-color: transparent; color: #18A0FB"
-						onclick="return confirm('¿Estás seguro de eliminar la sección?')"><i
-							class="fa-solid fa-trash-can"></i></a></td>
+				<tr align="center" th:each="user: ${users}">
+					<td th:text="${user.username}"></td>
+					<td th:text="${user.segment}"></td>
+					<td><a class="btn editBtn" type="submit" data-bs-toggle="modal"
+					th:attr="data-bs-target='#staticBackdrop'+*{user.id}"
+					style="background-color: transparent; color: #18A0FB"><i
+						class="fa-regular fa-pen-to-square"></i></a>
+
+					<div class="modal fade" th:id="*{'staticBackdrop'+{user.id}}"
+						data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+						aria-labelledby="staticBackdropLabel" aria-hidden="true">
+						<div class="modal-dialog modal-dialog-scrollable">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="staticBackdropLabel">Editar
+										Usuario</h5>
+									<button type="button" class="btn-close" data-bs-dismiss="modal"
+										aria-label="Close"></button>
+								</div>
+								<div class="modal-body" style="text-align: left;">
+									<form th:action="@{'/users/' + ${user.id} + '/update'}"
+										method="post">
+										<div class="mb-3">
+											<label for="newSegment" class="form-label">Tipo de Usuario</label> <input type="text" class="form-control"
+												name="newSegment" th:value="*{user.segment}">
+										</div>
+
+										<div class="mt-5" style="text-align: right;">
+											<button type="button" class="btn btn-secondary"
+												data-bs-dismiss="modal">Cancelar</button>
+											<button type="submit" class="btn"
+												style="background-color: #18A0FB; color: white">Editar</button>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div> <a class="btn" type="submit"
+					th:href="@{'/users/' + ${user.id} + '/delete'}"
+					style="background-color: transparent; color: #18A0FB"
+					onclick="return confirm('¿Estás seguro de eliminar el usuario?')"><i
+						class="fa-solid fa-trash-can"></i></a></td>
 				</tr>
 			</tbody>
 		</table>
