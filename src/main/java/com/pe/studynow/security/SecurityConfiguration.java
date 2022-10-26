@@ -43,9 +43,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		try {
-			http.authorizeRequests()
+			http.csrf().disable().authorizeRequests()
 					// Aqui realiza la configuración de los permisos
 
+					.antMatchers("/login").permitAll()
+					
 					.antMatchers("/*.js", "/*.css").permitAll()
 
 					.antMatchers("/students").access("hasRole('ADMINISTRATOR')")
@@ -76,11 +78,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 					.antMatchers("/courses/list").access("hasRole('ADMINISTRATOR')")
 
 					.antMatchers("/enrollments").access("hasRole('STUDENT')")
-
-					.and().formLogin().successHandler(sucessHandler).loginPage("/login").loginProcessingUrl("/login")
+					
+					.and().formLogin().successHandler(sucessHandler).loginPage("/login")
 					// Si el login es exitoso, retorna a /home
-					.defaultSuccessUrl("/main").permitAll().and().logout().logoutSuccessUrl("/login").permitAll()
-					// Si el usuario va a una ruta sin acceso, devuelve a /error(Configurado en MvcConfig)
+					.defaultSuccessUrl("/main",true).permitAll().and().logout().logoutSuccessUrl("/login").permitAll()
 					.and().exceptionHandling().accessDeniedPage("/error");
 		} catch (Exception e) {
 			// TODO: handle exception

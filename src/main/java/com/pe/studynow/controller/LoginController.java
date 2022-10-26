@@ -23,11 +23,11 @@ public class LoginController {
 
 		if (error != null) {
 			model.addAttribute("error",
-					"Nombre de usuario o contraseña incorrecto");
+					"Nombre de usuario o contrasena incorrecto");
 		}
 
 		if (logout != null) {
-			model.addAttribute("success", "Ha cerrado sesión con exito!");
+			model.addAttribute("success", "Ha cerrado sesion con exito!");
 		}
 
 		return "login";

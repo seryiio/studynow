@@ -108,10 +108,10 @@ public class CourseController {
 
 	@PostMapping("{id}/update")
 	public String updateCourse(Model model, @ModelAttribute("course") Course course, @PathVariable("id") Integer id,
-			@RequestParam("newName") String name, @RequestParam("newCycle") Integer cycle,
+			@RequestParam("newName") String name, @RequestParam("newCycle") int cycle,
 			@RequestParam("newCreditAmount") Integer creditAmount, @RequestParam("newCareer") Career careerName) {
 		try {
-			if (careerService.existById(id)) {
+			if (courseService.existById(id)) {
 				course.setName(name);
 				course.setCycle(cycle);
 				course.setNumberCredits(creditAmount);

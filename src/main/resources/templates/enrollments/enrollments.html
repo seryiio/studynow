@@ -145,7 +145,7 @@
 						</thead>
 
 						<tbody>
-							<tr th:each="enrollment : ${enrollments}">
+							<tr th:each="enrollment : ${enrollments}" th:if="${enrollment.student.id == student.id}">
 								<th scope="row" th:text="${enrollment.section.course.name}"></th>
 								<td th:text="${enrollment.section.course.numberCredits}"></td>
 								<td th:text="${enrollment.section.name}"></td>
