@@ -58,7 +58,6 @@ public class SectionController {
 		Section section = new Section();
 		model.addAttribute("section", section);
 		try {
-			System.out.print("ODI DE MIERDA");
 			List<Section> sections = sectionService.getAll();
 			model.addAttribute("sections", sections);
 			List<Course> courses = courseService.getAll();
@@ -125,7 +124,7 @@ public class SectionController {
 	@PostMapping("{id}/update")
 	public String updateSection(Model model, @ModelAttribute("section") Section section, @PathVariable("id") Integer id,
 			@RequestParam("newName") String name, @RequestParam("newVacancies") Integer vacancies,
-			@RequestParam("newStartTime") String startTime, @RequestParam("newEndTime") String endTime,
+			@RequestParam("newStartTime") String startTime, @RequestParam("newEndTime") String endTime, @RequestParam("newDay") String day,
 			@RequestParam("newCourse") Course courseName, @RequestParam("newTeacher") Teacher teacherName) {
 		try {
 			if (sectionService.existById(id)) {
@@ -133,6 +132,7 @@ public class SectionController {
 				section.setVacancies(vacancies);
 				section.setStartTime(startTime);
 				section.setEndTime(endTime);
+				section.setDay(day);
 				section.setCourse(courseName);
 				section.setTeacher(teacherName);
 				sectionService.update(section);

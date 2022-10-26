@@ -40,6 +40,10 @@ public class Section {
 	@Column(name = "end_time")
 	private String endTime;
 
+	@NotEmpty(message = "Debe ingresar un dia")
+	@Column(name = "days")
+	private String day;
+
 	@OneToMany(mappedBy = "section")
 	private List<Enrollment> enrollment;
 	
@@ -119,6 +123,14 @@ public class Section {
 
 	public void setEnrollment(List<Enrollment> enrollment) {
 		this.enrollment = enrollment;
+	}
+
+	public String getDay() {
+		return day;
+	}
+
+	public void setDay(String day) {
+		this.day = day;
 	}
 	
 	

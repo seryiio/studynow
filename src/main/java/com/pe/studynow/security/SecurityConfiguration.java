@@ -80,7 +80,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 					.antMatchers("/enrollments").access("hasRole('STUDENT')")
 					
 					.and().formLogin().successHandler(sucessHandler).loginPage("/login")
-					// Si el login es exitoso, retorna a /home
+					
 					.defaultSuccessUrl("/main",true).permitAll().and().logout().logoutSuccessUrl("/login").permitAll()
 					.and().exceptionHandling().accessDeniedPage("/error");
 		} catch (Exception e) {
