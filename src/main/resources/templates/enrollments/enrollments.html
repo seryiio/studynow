@@ -1,7 +1,14 @@
 <!doctype html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="layout/layout :: frag-head">
+<head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://kit.fontawesome.com/65219acda5.js"></script>
+<link rel="shortcut icon" href="#">
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+<link th:href="@{/css/solid.min.css}" rel="stylesheet">
+<link th:href="@{/css/style.css}" rel="stylesheet">
+<link th:href="@{/css/scheduleStyle.css}" rel="stylesheet">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Matricula</title>
 </head>
@@ -187,92 +194,1207 @@
 										aria-label="Close"></button>
 								</div>
 								<div class="modal-body w-5">
-									<table class="table table-bordered text-center"
-										style="color: black">
-										<thead style="background-color: #FFBFBF">
+									<table class="table table-bordered text-center">
+										<thead>
 											<tr style="background-color: #0ACF83; color: white">
-												<th scope="col">Hora</th>
-												<th scope="col">Lunes</th>
-												<th scope="col">Martes</th>
-												<th scope="col">Miercoles</th>
-												<th scope="col">Jueves</th>
-												<th scope="col">Viernes</th>
-												<th scope="col">Sabado</th>
-												<th scope="col">Domingo</th>
+												<th class="text-uppercase">Hora</th>
+												<th class="text-uppercase">Lunes</th>
+												<th class="text-uppercase">Martes</th>
+												<th class="text-uppercase">Miercoles</th>
+												<th class="text-uppercase">Jueves</th>
+												<th class="text-uppercase">Viernes</th>
+												<th class="text-uppercase">Sabado</th>
+												<th class="text-uppercase">Domingo</th>
 											</tr>
 										</thead>
 										<tbody>
 											<tr>
-												<td scope="row">07:00 - 8:00</td>
-												<th
-													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Lunes' && enrollment.section.startTime == '07:00'}"
+												<td class="align-middle">07:00 - 08:00</td>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
 													th:each="enrollment : ${enrollments}"
-													th:text="${enrollment.section.course.name}">
-												</th>
-												<th scope="row" th:each="enrollment : ${enrollments}"
-													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Martes'}"
-													th:text="${enrollment.section.course.name}"></th>
-												<th scope="row" th:each="enrollment : ${enrollments}"
-													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Miercoles'}"
-													th:text="${enrollment.section.course.name}"></th>
-												<th scope="row" th:each="enrollment : ${enrollments}"
-													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Jueves'}"
-													th:text="${enrollment.section.course.name}"></th>
-												<th scope="row" th:each="enrollment : ${enrollments}"
-													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Viernes'}"
-													th:text="${enrollment.section.course.name}"></th>
-												<th scope="row" th:each="enrollment : ${enrollments}"
-													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Sabado'}"
-													th:text="${enrollment.section.course.name}"></th>
-											</tr>
-											<tr>
-												<td scope="row">08:00 - 9:00</td>
-											</tr>
-											<tr>
-												<td scope="row">09:00 - 10:00</td>
-											</tr>
-											<tr>
-												<td scope="row">10:00 - 11:00</td>
-											</tr>
-											<tr>
-												<td scope="row">11:00 - 12:00</td>
-											</tr>
-											<tr>
-												<td scope="row">12:00 - 13:00</td>
-											</tr>
-											<tr>
-												<td scope="row">13:00 - 14:00</td>
-											</tr>
-											<tr>
-												<td scope="row">14:00 - 15:00</td>
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Lunes' && enrollment.section.startTime == '07:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Lunes' && enrollment.section.startTime == '07:00'}"
+													th:text="' '"></span></th>
+
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Martes' && enrollment.section.startTime == '07:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Martes' && enrollment.section.startTime == '07:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Miercoles' && enrollment.section.startTime == '07:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Miercoles' && enrollment.section.startTime == '07:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Jueves' && enrollment.section.startTime == '07:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Jueves' && enrollment.section.startTime == '07:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Viernes' && enrollment.section.startTime == '07:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Viernes' && enrollment.section.startTime == '07:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Sabado' && enrollment.section.startTime == '07:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Sabado' && enrollment.section.startTime == '07:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Domingo' && enrollment.section.startTime == '07:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Domingo' && enrollment.section.startTime == '07:00'}"
+													th:text="' '"></span></th>
 											</tr>
 
 											<tr>
-												<td scope="row">15:00 - 16:00</td>
-											</tr>
-											<tr>
-												<td scope="row">16:00 - 17:00</td>
-											</tr>
-											<tr>
-												<td scope="row">17:00 - 18:00</td>
-											</tr>
-											<tr>
-												<td scope="row">18:00 - 19:00</td>
-											</tr>
-											<tr>
-												<td scope="row">19:00 - 20:00</td>
+												<td class="align-middle">08:00 - 09:00</td>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Lunes' && enrollment.section.endTime == '09:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Lunes' && enrollment.section.endTime == '09:00'}"
+													th:text="' '"></span></th>
+
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Martes' && enrollment.section.endTime == '09:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Martes' && enrollment.section.endTime == '09:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Miercoles' && enrollment.section.endTime == '09:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Miercoles' && enrollment.section.endTime == '09:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Jueves' && enrollment.section.endTime == '09:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Jueves' && enrollment.section.endTime == '09:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Viernes' && enrollment.section.endTime == '09:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Viernes' && enrollment.section.endTime == '09:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Sabado' && enrollment.section.endTime == '09:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Sabado' && enrollment.section.endTime == '09:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Domingo' && enrollment.section.endTime == '09:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Domingo' && enrollment.section.endTime == '09:00'}"
+													th:text="' '"></span></th>
 											</tr>
 
 											<tr>
-												<td scope="row">20:00 - 21:00</td>
+												<td class="align-middle">09:00 - 10:00</td>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Lunes' && enrollment.section.startTime == '09:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Lunes' && enrollment.section.startTime == '09:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Martes' && enrollment.section.startTime == '09:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Martes' && enrollment.section.startTime == '09:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Miercoles' && enrollment.section.startTime == '09:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Miercoles' && enrollment.section.startTime == '09:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Jueves' && enrollment.section.startTime == '09:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Jueves' && enrollment.section.startTime == '09:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Viernes' && enrollment.section.startTime == '09:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Viernes' && enrollment.section.startTime == '09:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Sabado' && enrollment.section.startTime == '09:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Sabado' && enrollment.section.startTime == '09:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Domingo' && enrollment.section.startTime == '09:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Domingo' && enrollment.section.startTime == '09:00'}"
+													th:text="' '"></span></th>
 											</tr>
 
 											<tr>
-												<td scope="row">21:00 - 22:00</td>
+												<td class="align-middle">10:00 - 11:00</td>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Lunes' && enrollment.section.endTime == '11:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Lunes' && enrollment.section.endTime == '11:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Martes' && enrollment.section.endTime == '11:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Martes' && enrollment.section.endTime == '11:00'}"
+													th:text="' '"></span></th>
+
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Miercoles' && enrollment.section.endTime == '11:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Miercoles' && enrollment.section.endTime == '11:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Jueves' && enrollment.section.endTime == '11:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Jueves' && enrollment.section.endTime == '11:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Viernes' && enrollment.section.endTime == '11:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Viernes' && enrollment.section.endTime == '11:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Sabado' && enrollment.section.endTime == '11:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Sabado' && enrollment.section.endTime == '11:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Domingo' && enrollment.section.endTime == '11:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Domingo' && enrollment.section.endTime == '11:00'}"
+													th:text="' '"></span></th>
 											</tr>
 
 											<tr>
-												<td scope="row">22:00 - 23:00</td>
+												<td class="align-middle">11:00 - 12:00</td>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Lunes' && enrollment.section.startTime == '11:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Lunes' && enrollment.section.startTime == '11:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Martes' && enrollment.section.startTime == '11:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Martes' && enrollment.section.startTime == '11:00'}"
+													th:text="' '"></span></th>
+
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Miercoles' && enrollment.section.startTime == '11:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Miercoles' && enrollment.section.startTime == '11:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Jueves' && enrollment.section.startTime == '11:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Jueves' && enrollment.section.startTime == '11:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Viernes' && enrollment.section.startTime == '11:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Viernes' && enrollment.section.startTime == '11:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Sabado' && enrollment.section.startTime == '11:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Sabado' && enrollment.section.startTime == '11:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Domingo' && enrollment.section.startTime == '11:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Domingo' && enrollment.section.startTime == '11:00'}"
+													th:text="' '"></span></th>
+											</tr>
+											<tr>
+												<td class="align-middle">12:00 - 13:00</td>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Lunes' && enrollment.section.endTime == '13:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Lunes' && enrollment.section.endTime == '13:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Martes' && enrollment.section.endTime == '13:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Martes' && enrollment.section.endTime == '13:00'}"
+													th:text="' '"></span></th>
+
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Miercoles' && enrollment.section.endTime == '13:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Miercoles' && enrollment.section.endTime == '13:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Jueves' && enrollment.section.endTime == '13:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Jueves' && enrollment.section.endTime == '13:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Viernes' && enrollment.section.endTime == '13:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Viernes' && enrollment.section.endTime == '13:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Sabado' && enrollment.section.endTime == '13:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Sabado' && enrollment.section.endTime == '13:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Domingo' && enrollment.section.endTime == '13:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Domingo' && enrollment.section.endTime == '13:00'}"
+													th:text="' '"></span></th>
+											</tr>
+
+											<tr>
+												<td class="align-middle">13:00 - 14:00</td>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Lunes' && enrollment.section.startTime == '13:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Lunes' && enrollment.section.startTime == '13:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Martes' && enrollment.section.startTime == '13:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Martes' && enrollment.section.startTime == '13:00'}"
+													th:text="' '"></span></th>
+
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Miercoles' && enrollment.section.startTime == '13:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Miercoles' && enrollment.section.startTime == '13:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Jueves' && enrollment.section.startTime == '13:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Jueves' && enrollment.section.startTime == '13:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Viernes' && enrollment.section.startTime == '13:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Viernes' && enrollment.section.startTime == '13:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Sabado' && enrollment.section.startTime == '13:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Sabado' && enrollment.section.startTime == '13:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Domingo' && enrollment.section.startTime == '13:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Domingo' && enrollment.section.startTime == '13:00'}"
+													th:text="' '"></span></th>
+											</tr>
+											<tr>
+												<td class="align-middle">14:00 - 15:00</td>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Lunes' && enrollment.section.endTime == '15:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Lunes' && enrollment.section.endTime == '15:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Martes' && enrollment.section.endTime == '15:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Martes' && enrollment.section.endTime == '15:00'}"
+													th:text="' '"></span></th>
+
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Miercoles' && enrollment.section.endTime == '15:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Miercoles' && enrollment.section.endTime == '15:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Jueves' && enrollment.section.endTime == '15:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Jueves' && enrollment.section.endTime == '15:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Viernes' && enrollment.section.endTime == '15:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Viernes' && enrollment.section.endTime == '15:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Sabado' && enrollment.section.endTime == '15:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Sabado' && enrollment.section.endTime == '15:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Domingo' && enrollment.section.endTime == '15:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Domingo' && enrollment.section.endTime == '15:00'}"
+													th:text="' '"></span></th>
+											</tr>
+											<tr>
+												<td class="align-middle">15:00 - 16:00</td>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Lunes' && enrollment.section.startTime == '15:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Lunes' && enrollment.section.startTime == '15:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Martes' && enrollment.section.startTime == '15:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Martes' && enrollment.section.startTime == '15:00'}"
+													th:text="' '"></span></th>
+
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Miercoles' && enrollment.section.startTime == '15:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Miercoles' && enrollment.section.startTime == '15:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Jueves' && enrollment.section.startTime == '15:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Jueves' && enrollment.section.startTime == '15:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Viernes' && enrollment.section.startTime == '15:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Viernes' && enrollment.section.startTime == '15:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Sabado' && enrollment.section.startTime == '15:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Sabado' && enrollment.section.startTime == '15:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Domingo' && enrollment.section.startTime == '15:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Domingo' && enrollment.section.startTime == '15:00'}"
+													th:text="' '"></span></th>
+											</tr>
+											<tr>
+												<td class="align-middle">16:00 - 17:00</td>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Lunes' && enrollment.section.endTime == '17:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Lunes' && enrollment.section.endTime == '17:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Martes' && enrollment.section.endTime == '17:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Martes' && enrollment.section.endTime == '17:00'}"
+													th:text="' '"></span></th>
+
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Miercoles' && enrollment.section.endTime == '17:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Miercoles' && enrollment.section.endTime == '17:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Jueves' && enrollment.section.endTime == '17:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Jueves' && enrollment.section.endTime == '17:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Viernes' && enrollment.section.endTime == '17:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Viernes' && enrollment.section.endTime == '17:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Sabado' && enrollment.section.endTime == '17:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Sabado' && enrollment.section.endTime == '17:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Domingo' && enrollment.section.endTime == '17:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Domingo' && enrollment.section.endTime == '17:00'}"
+													th:text="' '"></span></th>
+											</tr>
+											<tr>
+												<td class="align-middle">17:00 - 18:00</td>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Lunes' && enrollment.section.startTime == '17:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Lunes' && enrollment.section.startTime == '17:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Martes' && enrollment.section.startTime == '17:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Martes' && enrollment.section.startTime == '17:00'}"
+													th:text="' '"></span></th>
+
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Miercoles' && enrollment.section.startTime == '17:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Miercoles' && enrollment.section.startTime == '17:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Jueves' && enrollment.section.startTime == '17:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Jueves' && enrollment.section.startTime == '17:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Viernes' && enrollment.section.startTime == '17:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Viernes' && enrollment.section.startTime == '17:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Sabado' && enrollment.section.startTime == '17:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Sabado' && enrollment.section.startTime == '17:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Domingo' && enrollment.section.startTime == '17:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Domingo' && enrollment.section.startTime == '17:00'}"
+													th:text="' '"></span></th>
+											</tr>
+											<tr>
+												<td class="align-middle">18:00 - 19:00</td>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Lunes' && enrollment.section.endTime == '19:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Lunes' && enrollment.section.endTime == '19:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Martes' && enrollment.section.endTime == '19:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Martes' && enrollment.section.endTime == '19:00'}"
+													th:text="' '"></span></th>
+
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Miercoles' && enrollment.section.endTime == '19:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Miercoles' && enrollment.section.endTime == '19:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Jueves' && enrollment.section.endTime == '19:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Jueves' && enrollment.section.endTime == '19:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Viernes' && enrollment.section.endTime == '19:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Viernes' && enrollment.section.endTime == '19:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Sabado' && enrollment.section.endTime == '19:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Sabado' && enrollment.section.endTime == '19:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Domingo' && enrollment.section.endTime == '19:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Domingo' && enrollment.section.endTime == '19:00'}"
+													th:text="' '"></span></th>
+											</tr>
+											<tr>
+												<td class="align-middle">19:00 - 20:00</td>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Lunes' && enrollment.section.startTime == '19:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Lunes' && enrollment.section.startTime == '19:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Martes' && enrollment.section.startTime == '19:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Martes' && enrollment.section.startTime == '19:00'}"
+													th:text="' '"></span></th>
+
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Miercoles' && enrollment.section.startTime == '19:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Miercoles' && enrollment.section.startTime == '19:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Jueves' && enrollment.section.startTime == '19:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Jueves' && enrollment.section.startTime == '19:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Viernes' && enrollment.section.startTime == '19:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Viernes' && enrollment.section.startTime == '19:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Sabado' && enrollment.section.startTime == '19:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Sabado' && enrollment.section.startTime == '19:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Domingo' && enrollment.section.startTime == '19:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Domingo' && enrollment.section.startTime == '19:00'}"
+													th:text="' '"></span></th>
+											</tr>
+											<tr>
+												<td class="align-middle">20:00 - 21:00</td>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Lunes' && enrollment.section.endTime == '21:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Lunes' && enrollment.section.endTime == '21:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Martes' && enrollment.section.endTime == '21:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Martes' && enrollment.section.endTime == '21:00'}"
+													th:text="' '"></span></th>
+
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Miercoles' && enrollment.section.endTime == '21:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Miercoles' && enrollment.section.endTime == '21:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Jueves' && enrollment.section.endTime == '21:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Jueves' && enrollment.section.endTime == '21:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Viernes' && enrollment.section.endTime == '21:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Viernes' && enrollment.section.endTime == '21:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Sabado' && enrollment.section.endTime == '21:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Sabado' && enrollment.section.endTime == '21:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Domingo' && enrollment.section.endTime == '21:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Domingo' && enrollment.section.endTime == '21:00'}"
+													th:text="' '"></span></th>
+											</tr>
+											<tr>
+												<td class="align-middle">21:00 - 22:00</td>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Lunes' && enrollment.section.startTime == '21:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Lunes' && enrollment.section.startTime == '21:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Martes' && enrollment.section.startTime == '21:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Martes' && enrollment.section.startTime == '21:00'}"
+													th:text="' '"></span></th>
+
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Miercoles' && enrollment.section.startTime == '21:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Miercoles' && enrollment.section.startTime == '21:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Jueves' && enrollment.section.startTime == '21:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Jueves' && enrollment.section.startTime == '21:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Viernes' && enrollment.section.startTime == '21:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Viernes' && enrollment.section.startTime == '21:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Sabado' && enrollment.section.startTime == '21:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Sabado' && enrollment.section.startTime == '21:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Domingo' && enrollment.section.startTime == '21:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Domingo' && enrollment.section.startTime == '21:00'}"
+													th:text="' '"></span></th>
+											</tr>
+											<tr>
+												<td class="align-middle">22:00 - 23:00</td>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Lunes' && enrollment.section.endTime == '23:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Lunes' && enrollment.section.endTime == '23:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Martes' && enrollment.section.endTime == '23:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Martes' && enrollment.section.endTime == '23:00'}"
+													th:text="' '"></span></th>
+
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Miercoles' && enrollment.section.endTime == '23:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Miercoles' && enrollment.section.endTime == '23:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Jueves' && enrollment.section.endTime == '23:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Jueves' && enrollment.section.endTime == '23:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Viernes' && enrollment.section.endTime == '23:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Viernes' && enrollment.section.endTime == '23:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Sabado' && enrollment.section.endTime == '23:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Sabado' && enrollment.section.endTime == '23:00'}"
+													th:text="' '"></span></th>
+												<th><span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:if="${enrollment.student.id == student.id && enrollment.section.day == 'Domingo' && enrollment.section.endTime == '23:00'}"
+													th:text="${enrollment.section.course.name + ' - ' + enrollment.section.name}"></span>
+													<span
+													class="padding-5px-tb padding-15px-lr border-radius-5 margin-10px-bottom font-size16 xs-font-size13"
+													th:each="enrollment : ${enrollments}"
+													th:unless="${enrollment.student.id == student.id && enrollment.section.day == 'Domingo' && enrollment.section.endTime == '23:00'}"
+													th:text="' '"></span></th>
 											</tr>
 										</tbody>
 									</table>
