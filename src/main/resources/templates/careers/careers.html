@@ -48,7 +48,6 @@
 		<thead class="bg-light">
 			<tr>
 				<th scope="col"></th>
-				<th scope="col">ID</th>
 				<th scope="col">Nombre de Carrera</th>
 				<th scope="col"></th>
 			</tr>
@@ -57,7 +56,6 @@
 				<td class="text-center"><input
 					class="form-check-input checkbox" id="codigoCarrera1"
 					type="checkbox" th:value="${career.id}"></td>
-				<td th:text="${career.id}"></td>
 				<td th:text="${career.name}"></td>
 				<td><a class="btn editBtn" type="submit" data-bs-toggle="modal"
 					th:attr="data-bs-target='#staticBackdrop'+*{career.id}"
