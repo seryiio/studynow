@@ -192,33 +192,37 @@
 						</div>
 
 
-						<p class="col-md-8 fs-4">
-							Nombre de Usuario: <span sec:authentication="name"></span>
+						<p class="col-md-8 fs-4 fw-bold">
+							Nombre de Usuario: <span sec:authentication="name"
+								class="fw-normal"></span>
 						</p>
 						<div sec:authorize="hasRole('ROLE_TEACHER')">
-							<p class="col-md-8 fs-4">
+							<p class="col-md-8 fs-4 fw-bold">
 								Nombres: <span
-									th:text="${teacher.firstName + ' ' + teacher.lastName}"></span>
+									th:text="${teacher.firstName + ' ' + teacher.lastName}"
+									class="fw-normal"></span>
 							</p>
-							<p class="col-md-8 fs-4">
-								Correo Universitario: <span th:text="${teacher.emailUniversity}"></span>
+							<p class="col-md-8 fs-4 fw-bold">
+								Correo Universitario: <span th:text="${teacher.emailUniversity}"
+									class="fw-normal"></span>
 							</p>
-							<p class="col-md-8 fs-4">
-								Teléfono: <span th:text="${teacher.phoneNumber}"></span>
+							<p class="col-md-8 fs-4 fw-bold">
+								Teléfono: <span th:text="${teacher.phoneNumber}"
+									class="fw-normal"></span>
 							</p>
 						</div>
 						<p sec:authorize="hasRole('ROLE_STUDENT')"
 							class="col-md-8 fs-4 fw-bold">
-							Nombres y Apellidos: <span
-								th:text="${student.firstName + ' ' + student.lastName}"
-								class="fst-normal"></span> <br /> DNI: <span
-								th:text="${student.dni}" class="fst-normal"></span> <br />
-							Numero de Telefono: <span th:text="${student.phoneNumber}"
-								class="fst-normal"></span> <br /> Correo Personal: <span
-								th:text="${student.emailPersonal}" class="fst-normal"></span> <br />
-							Correo Universitario: <span th:text="${student.emailUniversity}"
-								class="fst-normal"></span> <br /> Carrera: <span
-								th:text="${student.career.name}" class="fst-normal"></span> <br />
+							Nombres y Apellidos: <span class="fw-normal"
+								th:text="${student.firstName + ' ' + student.lastName}"></span>
+							<br /> DNI: <span th:text="${student.dni}" class="fw-normal"></span>
+							<br /> Numero de Telefono: <span
+								th:text="${student.phoneNumber}" class="fw-normal"></span> <br />
+							Correo Personal: <span th:text="${student.emailPersonal}"
+								class="fw-normal"></span> <br /> Correo Universitario: <span
+								th:text="${student.emailUniversity}" class="fw-normal"></span> <br />
+							Carrera: <span th:text="${student.career.name}" class="fw-normal"></span>
+							<br />
 						</p>
 
 					</div>

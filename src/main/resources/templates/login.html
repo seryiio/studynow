@@ -12,33 +12,38 @@
 <title>StudyNow</title>
 </head>
 <body class="text-center">
-	<main class="form-signin w-100 m-auto">
-		<form th:action="@{/login}" method="post">
-			<div
-				class="d-flex flex-wrap justify-content-center py-3 mb-4 align-items-center text-white">
-				<label for="fw-bold" style="color: black; font-size: 3rem">Bienvenido</label>
+	<div class="container" style="margin: 0 0 0 0">
+		<div class="row">
+			<div class="col-4 columnaDerechaLogin" style="background-color: #007686; color: white;  min-height: 100vh"></div>
+			<div class="col-8 form-signin w-100 m-auto">
+				<form th:action="@{/login}" method="post">
+					<div
+						class="d-flex flex-wrap justify-content-center py-3 mb-4 align-items-center text-white">
+						<label for="fw-bold" style="color: black; font-size: 3rem">Bienvenido</label>
+					</div>
+					<div class="w-100 col-sm-3 mb-3">
+						<input type="text" class="form-control" name="username"
+							id="username" placeholder="Usuario" autofocus required />
+					</div>
+					<div class="w-100 col-sm-3 mb-5">
+						<input type="password" class="form-control" name="password"
+							id="password" placeholder="Contraseña" required />
+					</div>
+					<div class="w-100 col-sm-3 mb-3">
+						<input type="submit" class="w-100 btn btn-lg"
+							style="background-color: #18A0FB; color: white" value="Ingresar" />
+					</div>
+					<div class="w-100 col-sm-3">
+						<div class="alert alert-success" th:if="${success != null}"
+							th:text="${success}"></div>
+						<div class="alert alert-danger" th:if="${error != null}"
+							th:text="${error}"></div>
+						<div class="alert alert-info" th:if="${info != null}"
+							th:text="${info}"></div>
+					</div>
+				</form>
 			</div>
-			<div class="w-100 col-sm-3 mb-3">
-				<input type="text" class="form-control" name="username"
-					id="username" placeholder="Usuario" autofocus required />
-			</div>
-			<div class="w-100 col-sm-3 mb-5">
-				<input type="password" class="form-control" name="password"
-					id="password" placeholder="Contraseña" required />
-			</div>
-			<div class="w-100 col-sm-3 mb-3">
-				<input type="submit" class="w-100 btn btn-lg"
-					style="background-color: #18A0FB; color: white" value="Ingresar" />
-			</div>
-			<div class="w-100 col-sm-3">
-				<div class="alert alert-success" th:if="${success != null}"
-					th:text="${success}"></div>
-				<div class="alert alert-danger" th:if="${error != null}"
-					th:text="${error}"></div>
-				<div class="alert alert-info" th:if="${info != null}"
-					th:text="${info}"></div>
-			</div>
-		</form>
-	</main>
+		</div>
+	</div>
 </body>
 </html>
