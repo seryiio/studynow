@@ -28,6 +28,10 @@ public class EnrollmentServiceImpl implements EnrollmentService{
 		return this.enrollmentRepository;
 	}
 	@Override
+	public List<String[]> Reporte1() {
+		return this.enrollmentRepository.Reporte1();
+	}
+	@Override
 	public List<Enrollment> findByStudent(String id) throws Exception {
 		if (studentRepository.existsById(id)) {
 			Optional<Student> optional = studentRepository.findById(id);

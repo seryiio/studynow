@@ -5,6 +5,7 @@ import java.util.List;
 import com.pe.studynow.model.entity.Enrollment;
 
 public interface EnrollmentService extends CrudService<Enrollment, Integer>{
+	public List<String[]> Reporte1();
 
 	List<Enrollment> findByStudent(String id) throws Exception;
 

@@ -43,14 +43,18 @@
 			<div sec:authorize="hasRole('ROLE_ADMINISTRATOR')"
 				class="col align-self-center" style="text-align: center">
 
-				<a class="btn w-25" style="background-color: #18A0FB; color: white"
+				<a class="btn" style="background-color: #18A0FB; color: white; width: 15rem"
 					th:href="@{/users}" role="button"> Perfiles de Usuario </a> <a
-					class="btn w-25 ms-5"
-					style="background-color: #18A0FB; color: white"
+					class="btn ms-5"
+					style="background-color: #18A0FB; color: white; width: 15rem"
 					th:href="@{/courses}" role="button"> Cursos </a> <a
-					class="btn w-25 ms-5"
-					style="background-color: #18A0FB; color: white"
-					th:href="@{/sections}" role="button"> Secciones </a>
+					class="btn ms-5"
+					style="background-color: #18A0FB; color: white; width: 15rem"
+					th:href="@{/sections}" role="button"> Secciones </a><a
+					class="btn ms-5"
+					style="background-color: #18A0FB; color: white; width: 15rem"
+					th:href="@{/enrollments/report}" role="button"> Reporte </a>
+
 			</div>
 			<div sec:authorize="hasRole('ROLE_STUDENT')"
 				class="col align-self-center" style="text-align: center">

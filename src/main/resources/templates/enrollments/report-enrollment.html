@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://kit.fontawesome.com/65219acda5.js"></script>
+<link rel="shortcut icon" href="#">
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+<link th:href="@{/css/solid.min.css}" rel="stylesheet">
+<link th:href="@{/css/style.css}" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reporte de Matricula 2022-02</title>
+<style>
+
+@media ( min-width : 768px) {
+	body {
+		background-color: #EFEFEF;
+		font-family: 'Abel', sans-serif;
+		font-size: 16px;
+	}
+}
+</style>
+</head>
+<body>
+	<header th:replace="layout/layout :: frag-header"></header>
+	<section class="section mt-3">
+		<div class="card text-center">
+			<div class="card-header bold">
+				Reporte de Alumnos matriculados en el ciclo
+				<dt class="fs-2">2022 - 02</dt>
+			</div>
+			<div class="card-body">
+
+				<table class="table align-middle mb-0 mt-3 bg-white text-center">
+					<thead class="bg-light">
+						<tr>
+							<th scope="col">Codigo</th>
+							<th scope="col">Nombres</th>
+							<th scope="col">Apellidos</th>
+							<th scope="col">Correo Universitario</th>
+							<th scope="col">Correo Personal</th>
+							<th scope="col">Telefono</th>
+							<th scope="col">Ciclo</th>
+							<th scope="col">Carrera</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="report : ${reporte1}">
+							<th scope="row" th:text="${report[0]}"></th>
+							<th scope="row" th:text="${report[1]}"></th>
+							<th scope="row" th:text="${report[2]}"></th>
+							<th scope="row" th:text="${report[3]}"></th>
+							<th scope="row" th:text="${report[4]}"></th>
+							<th scope="row" th:text="${report[5]}"></th>
+							<th scope="row" th:text="${report[6]}"></th>
+							<th scope="row" th:text="${report[7]}"></th>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</section>
+	<footer th:replace="layout/layout :: frag-footer"></footer>
+</body>
+</html>

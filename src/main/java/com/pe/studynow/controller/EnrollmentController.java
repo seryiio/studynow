@@ -1,6 +1,7 @@
 package com.pe.studynow.controller;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -157,5 +158,18 @@ public class EnrollmentController {
 			e.printStackTrace();
 		}
 		return "redirect:/enrollments";
+	}
+	
+	@RequestMapping("/report")
+	public String listEnrollmentforCycle(Map<String, Object> model) {
+
+		try {
+			model.put("reporte1", enrollmentService.Reporte1());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return "enrollments/report-enrollment";
 	}
 }

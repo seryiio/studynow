@@ -39,4 +39,7 @@ public interface EnrollmentRepository extends JpaRepository<Enrollment, Integer>
     @Modifying
     @Query(value="update sections set vacancies = sec.vacancies+1 from sections sec inner join enrollments en ON sec.id=en.section_id where en.enrollment_id=:matricula AND sections.id =en.section_id AND sections.vacancies<10 AND sections.vacancies>0 ", nativeQuery = true )
     public void RestaurarVacantes(@Param("matricula") Integer matricula);
+	
+	@Query(value= "SELECT students.student_id,students.first_name, students.last_name,email_university,email_personal,phone_number,cycle, career_id  FROM Students INNER JOIN Enrollments ON Students.student_id=Enrollments.student_id GROUP BY Students.student_id", nativeQuery = true)
+	public List<String[]> Reporte1();
 }

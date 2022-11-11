@@ -28,6 +28,7 @@ import com.pe.studynow.model.repository.CareerRepository;
 @RequestMapping("/careers")
 @SessionAttributes("{career}")
 public class CareerController {
+	
 	@Autowired
 	private CareerRepository careerRepository;
 	@Autowired
