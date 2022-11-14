@@ -125,4 +125,19 @@ public class UserController {
 		segments.add(Segment.TEACHER);
 		return segments;
 	}
+	
+	@GetMapping("{id}/delete")
+	public String deleteUser(Model model, @PathVariable("id") Integer id) {
+		try {
+			if (userService.existById(id)) {
+				userService.deleteById(id);
+			} else {
+				return "redirect:/users";
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "redirect:/users";
+	}
 }
